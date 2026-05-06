@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { ScrollReveal } from "./scroll-reveal";
 import "./globals.css";
 
@@ -28,6 +29,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col font-sans">
         <ScrollReveal />
         {children}
+        <Analytics />
       </body>
     </html>
   );
