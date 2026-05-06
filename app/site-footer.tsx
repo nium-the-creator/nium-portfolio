@@ -20,9 +20,10 @@ export function SiteFooter({ id = "contact", compact }: SiteFooterProps) {
   return (
     <footer
       id={id}
-      className="mt-auto bg-[#fafaf8] px-5 pb-12 pt-10 md:pb-16 md:pt-14"
+      className="mt-auto bg-[#fafaf8] section-top section-bottom"
+      data-reveal
     >
-      <div className="mx-auto w-full max-w-[1920px] space-y-8">
+      <div className="page-shell space-y-8">
         <h2 className={headingClass}>
           <span>Get</span>
           <span>in</span>

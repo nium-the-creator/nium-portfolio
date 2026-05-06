@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
+import { ScrollReveal } from "./scroll-reveal";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -24,7 +25,10 @@ export default function RootLayout({
       lang="en"
       className={`${manrope.variable} h-full scroll-smooth antialiased`}
     >
-      <body className="min-h-full flex flex-col font-sans">{children}</body>
+      <body className="min-h-full flex flex-col font-sans">
+        <ScrollReveal />
+        {children}
+      </body>
     </html>
   );
 }

@@ -1,5 +1,5 @@
 export const SOCIAL_LINKS = [
-  { label: "Email", href: "mailto:hello@example.com" },
+  { label: "Email", href: "mailto:peteriveyhou6@gmail.com" },
   { label: "Instagram", href: "https://instagram.com" },
   { label: "Pintrest", href: "https://pinterest.com" },
   { label: "X (Twitter)", href: "https://x.com" },

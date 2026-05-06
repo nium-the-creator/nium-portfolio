@@ -2,7 +2,19 @@
 
 import { useEffect, useState } from "react";
 
-export function MexicoCityClock() {
+type MexicoCityClockProps = {
+  compact?: boolean;
+};
+
+const mexicoCityTimeFormatter = new Intl.DateTimeFormat("en-US", {
+  timeZone: "America/Mexico_City",
+  hour: "2-digit",
+  minute: "2-digit",
+  second: "2-digit",
+  hour12: true,
+});
+
+export function MexicoCityClock({ compact }: MexicoCityClockProps) {
   const [now, setNow] = useState(() => new Date());
 
   useEffect(() => {
@@ -10,16 +22,14 @@ export function MexicoCityClock() {
     return () => clearInterval(id);
   }, []);
 
-  const formatted = new Intl.DateTimeFormat("en-US", {
-    timeZone: "America/Mexico_City",
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
-    hour12: true,
-  }).format(now);
+  const formatted = mexicoCityTimeFormatter.format(now);
 
   return (
-    <span className="text-[21px] font-normal leading-[18px] tracking-[-0.6px] text-[#0f0f0f]">
+    <span
+      className={`font-normal leading-[18px] tracking-[-0.6px] text-[#0f0f0f] tabular-nums ${
+        compact ? "text-[15px]" : "text-[21px]"
+      }`}
+    >
       CDMX {formatted}
     </span>
   );

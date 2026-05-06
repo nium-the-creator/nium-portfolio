@@ -18,6 +18,7 @@ type FilterId = (typeof FILTER_OPTIONS)[number]["id"];
 
 type Project = {
   title: string;
+  slug: string;
   client: string;
   detailTags: string[];
   filterIds: FilterId[];
@@ -26,6 +27,7 @@ type Project = {
 const PROJECTS: Project[] = [
   {
     title: "THE CLARITY TABLE",
+    slug: "the-clarity-table",
     client: "Retrorave Festivals",
     detailTags: [
       "Brand Identity Design",
@@ -36,6 +38,7 @@ const PROJECTS: Project[] = [
   },
   {
     title: "G.R.I.T.",
+    slug: "grit",
     client: "Eco-Conscious Fashion",
     detailTags: [
       "Visual Merchandising",
@@ -46,6 +49,7 @@ const PROJECTS: Project[] = [
   },
   {
     title: "ZCASH.ME",
+    slug: "zcash-me",
     client: "Tech Innovations Summit",
     detailTags: [
       "User Experience Design",
@@ -56,6 +60,7 @@ const PROJECTS: Project[] = [
   },
   {
     title: "LUXURY LOFTS",
+    slug: "luxury-lofts",
     client: "Tech Innovations Summit",
     detailTags: [
       "User Experience Design",
@@ -66,6 +71,7 @@ const PROJECTS: Project[] = [
   },
   {
     title: "OWA",
+    slug: "owa",
     client: "Retrorave Festivals",
     detailTags: [
       "Brand Identity Design",
@@ -76,6 +82,7 @@ const PROJECTS: Project[] = [
   },
   {
     title: "MANJALA CULTURE",
+    slug: "manjala-culture",
     client: "Eco-Conscious Fashion",
     detailTags: [
       "Visual Merchandising",
@@ -86,6 +93,7 @@ const PROJECTS: Project[] = [
   },
   {
     title: "IVEALTH",
+    slug: "ivealth",
     client: "Tech Innovations Summit",
     detailTags: [
       "User Experience Design",
@@ -96,6 +104,7 @@ const PROJECTS: Project[] = [
   },
   {
     title: "RETRORAVE FESTIVALS",
+    slug: "retrorave-festivals",
     client: "Tech Innovations Summit",
     detailTags: [
       "User Experience Design",
@@ -181,7 +190,7 @@ export function WorksView() {
             {pageItems.map((project) => (
               <article key={project.title}>
                 <Link
-                  href="#"
+                  href={`/works/${project.slug}`}
                   className="group block focus:outline-none focus-visible:ring-2 focus-visible:ring-[#840be9] focus-visible:ring-offset-2 focus-visible:ring-offset-[#fafaf8]"
                 >
                   <div className="relative aspect-[865/982] w-full overflow-hidden bg-[#121212]">
