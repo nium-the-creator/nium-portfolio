@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
 const FILTER_OPTIONS = [
   { id: "all", label: "All works" },
@@ -15,107 +15,76 @@ const FILTER_OPTIONS = [
 ] as const;
 
 type FilterId = (typeof FILTER_OPTIONS)[number]["id"];
+type CategoryId = Exclude<FilterId, "all">;
+
+const CATEGORY_LABELS: Record<CategoryId, string> = {
+  "brand-identity": "Brand Identity Design",
+  "art-direction": "Art Direction",
+  "brand-strategy": "Brand Strategy",
+  campaign: "Campaign Management",
+  packaging: "Packaging",
+  "ui-ux": "UI/UX",
+};
 
 type Project = {
   title: string;
   slug: string;
-  client: string;
-  detailTags: string[];
-  filterIds: FilterId[];
+  tagline: string;
+  filterIds: CategoryId[];
 };
 
 const PROJECTS: Project[] = [
   {
     title: "THE CLARITY TABLE",
     slug: "the-clarity-table",
-    client: "Retrorave Festivals",
-    detailTags: [
-      "Brand Identity Design",
-      "Art Direction",
-      "Campaign Management",
-    ],
-    filterIds: ["brand-identity", "art-direction", "campaign"],
+    tagline: "Where clarity begins",
+    filterIds: ["brand-identity", "brand-strategy", "campaign"],
   },
   {
     title: "G.R.I.T.",
     slug: "grit",
-    client: "Eco-Conscious Fashion",
-    detailTags: [
-      "Visual Merchandising",
-      "Social Media Strategy",
-      "Content Creation",
-    ],
+    tagline: "Growth rooted in tenacity",
     filterIds: ["art-direction", "brand-strategy", "campaign"],
   },
   {
     title: "ZCASH.ME",
     slug: "zcash-me",
-    client: "Tech Innovations Summit",
-    detailTags: [
-      "User Experience Design",
-      "Interactive Media",
-      "Product Launch Strategy",
-    ],
+    tagline: "Simple money, sharper moves",
     filterIds: ["ui-ux", "brand-strategy"],
   },
   {
     title: "LUXURY LOFTS",
     slug: "luxury-lofts",
-    client: "Tech Innovations Summit",
-    detailTags: [
-      "User Experience Design",
-      "Interactive Media",
-      "Product Launch Strategy",
-    ],
+    tagline: "Elevated living, quietly refined",
     filterIds: ["ui-ux", "packaging"],
   },
   {
     title: "OWA",
     slug: "owa",
-    client: "Retrorave Festivals",
-    detailTags: [
-      "Brand Identity Design",
-      "Art Direction",
-      "Campaign Management",
-    ],
+    tagline: "Culture in every curve",
     filterIds: ["brand-identity", "campaign"],
   },
   {
     title: "MANJALA CULTURE",
     slug: "manjala-culture",
-    client: "Eco-Conscious Fashion",
-    detailTags: [
-      "Visual Merchandising",
-      "Social Media Strategy",
-      "Content Creation",
-    ],
+    tagline: "Built from culture, made to move",
     filterIds: ["art-direction", "brand-strategy"],
   },
   {
     title: "IVEALTH",
     slug: "ivealth",
-    client: "Tech Innovations Summit",
-    detailTags: [
-      "User Experience Design",
-      "Interactive Media",
-      "Product Launch Strategy",
-    ],
+    tagline: "Invest with everyday clarity",
     filterIds: ["ui-ux", "brand-identity"],
   },
   {
     title: "RETRORAVE FESTIVALS",
     slug: "retrorave-festivals",
-    client: "Tech Innovations Summit",
-    detailTags: [
-      "User Experience Design",
-      "Interactive Media",
-      "Product Launch Strategy",
-    ],
+    tagline: "Past sounds. Future nights.",
     filterIds: ["campaign", "brand-identity", "art-direction"],
   },
 ];
 
-const PER_PAGE = 3;
+const PER_PAGE = 4;
 
 export function WorksView() {
   const [filter, setFilter] = useState<FilterId>("all");
@@ -127,10 +96,6 @@ export function WorksView() {
   }, [filter]);
 
   const pageCount = Math.max(1, Math.ceil(filtered.length / PER_PAGE));
-
-  useEffect(() => {
-    setPage((p) => Math.min(p, pageCount));
-  }, [pageCount]);
 
   const safePage = Math.min(page, pageCount);
   const sliceStart = (safePage - 1) * PER_PAGE;
@@ -195,13 +160,13 @@ export function WorksView() {
                 >
                   <div className="relative aspect-[865/982] w-full overflow-hidden bg-[#121212]">
                     <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/95 via-black/55 to-transparent p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
-                      <div className="flex items-end justify-between gap-4 text-white">
-                        <p className="text-[15px] font-normal uppercase leading-[18px] tracking-[-0.6px]">
-                          {project.client}
+                      <div className="flex items-end justify-between gap-6 text-white">
+                        <p className="max-w-[52%] text-[15px] font-normal leading-[18px] tracking-[-0.6px]">
+                          {project.tagline}
                         </p>
                         <ul className="text-right text-[16px] font-medium leading-[19.2px] tracking-[-0.64px]">
-                          {project.detailTags.map((t) => (
-                            <li key={t}>{t}</li>
+                          {project.filterIds.map((id) => (
+                            <li key={id}>{CATEGORY_LABELS[id]}</li>
                           ))}
                         </ul>
                       </div>
@@ -215,7 +180,7 @@ export function WorksView() {
                       height={52}
                       className="shrink-0"
                     />
-                    <span className="text-[clamp(2rem,7vw,4.125rem)] font-bold leading-[31px] text-black">
+                    <span className="text-[clamp(1rem,3.5vw,2.0625rem)] font-bold leading-[0.95] text-black">
                       {project.title}
                     </span>
                   </div>

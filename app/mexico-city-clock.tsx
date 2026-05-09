@@ -6,8 +6,8 @@ type MexicoCityClockProps = {
   compact?: boolean;
 };
 
-const mexicoCityTimeFormatter = new Intl.DateTimeFormat("en-US", {
-  timeZone: "America/Mexico_City",
+const nigerianTimeFormatter = new Intl.DateTimeFormat("en-US", {
+  timeZone: "Africa/Lagos",
   hour: "2-digit",
   minute: "2-digit",
   second: "2-digit",
@@ -22,7 +22,7 @@ export function MexicoCityClock({ compact }: MexicoCityClockProps) {
     return () => clearInterval(id);
   }, []);
 
-  const formatted = mexicoCityTimeFormatter.format(now);
+  const formatted = nigerianTimeFormatter.format(now);
 
   return (
     <span
@@ -30,7 +30,7 @@ export function MexicoCityClock({ compact }: MexicoCityClockProps) {
         compact ? "text-[15px]" : "text-[21px]"
       }`}
     >
-      CDMX {formatted}
+      LAGOS {formatted}
     </span>
   );
 }

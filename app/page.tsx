@@ -1,6 +1,7 @@
 import type { CSSProperties, ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { IntroMedia } from "./intro-media";
 import { SiteFooter } from "./site-footer";
 import { SiteHeader } from "./site-header";
 
@@ -24,19 +25,10 @@ export default function Home() {
           className="flex min-h-[min(100vh,1200px)] flex-col items-center justify-center gap-8 px-6 py-16 text-center md:gap-12"
           data-reveal="section"
         >
-          <div className="flex w-full max-w-xl flex-col items-center gap-2 md:items-start md:text-left">
-            <div className="flex items-center gap-2 text-[25px] font-medium lowercase text-black">
+          <div className="flex w-full max-w-xl justify-center">
+            <div className="flex items-center justify-center gap-2 text-center text-[25px] font-medium lowercase text-black">
               <span className="typing-line">
                 Hey, welcome to my portfolio page
-              </span>
-              <span className="hidden h-[34px] w-px shrink-0 sm:block">
-                <Image
-                  src="/figma/cursor-line.svg"
-                  alt=""
-                  width={1}
-                  height={35}
-                  className="h-[34px] w-auto"
-                />
               </span>
             </div>
           </div>
@@ -45,7 +37,7 @@ export default function Home() {
             i am
           </p>
 
-          <h1 className="flex flex-col items-center gap-2 px-2 sm:flex-row sm:gap-4 md:gap-6">
+          <h1 className="flex flex-col items-center gap-2 px-2 xl:flex-row xl:gap-6">
             <span className="text-center text-[clamp(3.5rem,14vw,10.3rem)] font-medium uppercase leading-[0.85] tracking-[-0.06em] text-[#0f0f0f]">
               adonis
             </span>
@@ -81,23 +73,20 @@ export default function Home() {
                 data-reveal="soft"
                 style={{ "--reveal-delay": "80ms" } as CSSProperties}
               >
-                <div className="relative aspect-[691/482] w-full overflow-hidden rounded-[33px] bg-white">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <Image
-                      src="/figma/intro-icon.svg"
-                      alt=""
-                      width={94}
-                      height={94}
-                      className="opacity-90"
-                    />
-                  </div>
-                </div>
+                <IntroMedia videoSrc="/figma/intro-generated.mp4" />
                 <Image
                   src="/figma/intro-decoration.svg"
                   alt=""
                   width={938}
                   height={566}
                   className="pointer-events-none absolute -bottom-8 left-1/2 hidden w-[min(100%,520px)] -translate-x-1/3 md:block"
+                />
+                <Image
+                  src="/figma/intro-icon.svg"
+                  alt=""
+                  width={46}
+                  height={46}
+                  className="scribble-traveler pointer-events-none hidden md:block"
                 />
               </div>
               <div

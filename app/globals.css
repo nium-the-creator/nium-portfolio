@@ -56,12 +56,20 @@ body {
     display: inline-block;
     max-width: max-content;
     overflow: hidden;
-    border-right: 1px solid currentColor;
     white-space: nowrap;
     clip-path: inset(0 100% 0 0);
-    animation:
-      type-in 1.8s steps(34, end) 260ms both,
-      caret-blink 800ms step-end infinite;
+    animation: type-in 1.8s steps(34, end) 260ms both;
+  }
+
+  .scribble-traveler {
+    position: absolute;
+    bottom: 5.5rem;
+    left: 10%;
+    z-index: 20;
+    offset-path: path("M 0 95 C 65 25 115 125 185 76 S 310 28 365 92 S 455 126 520 54");
+    offset-rotate: 0deg;
+    animation: scribble-follow 4.8s ease-in-out infinite;
+    filter: drop-shadow(0 8px 18px rgb(0 0 0 / 0.16));
   }
 }
 
@@ -102,7 +110,11 @@ body {
     }
 
     .typing-line {
-      border-right: 0;
+      clip-path: none;
+      animation: none;
+    }
+
+    .scribble-traveler {
       animation: none;
     }
   }
@@ -118,8 +130,27 @@ body {
   }
 }
 
-@keyframes caret-blink {
-  50% {
-    border-color: transparent;
+@keyframes scribble-follow {
+  0%,
+  12% {
+    opacity: 0;
+    offset-distance: 0%;
+    transform: scale(0.88);
+  }
+
+  18% {
+    opacity: 1;
+  }
+
+  72% {
+    opacity: 1;
+    offset-distance: 100%;
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    offset-distance: 100%;
+    transform: scale(0.92);
   }
 }
