@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 type IntroMediaProps = {
@@ -56,18 +55,11 @@ export function IntroMedia({ videoSrc }: IntroMediaProps) {
       ) : null}
 
       <div
-        className={`absolute inset-0 flex items-center justify-center transition-opacity duration-300 ${
+        className={`absolute inset-0 bg-white transition-opacity duration-300 ${
           videoReady ? "opacity-0" : "opacity-100"
         }`}
-      >
-        <Image
-          src="/figma/intro-icon.svg"
-          alt=""
-          width={94}
-          height={94}
-          className="opacity-90"
-        />
-      </div>
+        aria-hidden="true"
+      />
     </div>
   );
 }

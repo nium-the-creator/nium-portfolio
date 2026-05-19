@@ -14,6 +14,15 @@ const services = [
   { title: "UI/UX", image: "/figma/service-5.png" },
 ] as const;
 
+const selectedWorks = [
+  { title: "THE CLARITY TABLE", slug: "the-clarity-table" },
+  { title: "G.R.I.T.", slug: "grit" },
+  { title: "ZCASH.ME", slug: "zcash-me" },
+  { title: "LUXURY LOFTS", slug: "luxury-lofts" },
+  { title: "OWA", slug: "owa" },
+  { title: "MANJALA CULTURE", slug: "manjala-culture" },
+] as const;
+
 export default function Home() {
   return (
     <div className="relative flex min-h-full flex-col bg-[#fafaf8] text-[#0f0f0f]">
@@ -26,7 +35,7 @@ export default function Home() {
           data-reveal="section"
         >
           <div className="flex w-full max-w-xl justify-center">
-            <div className="flex items-center justify-center gap-2 text-center text-[25px] font-medium lowercase text-black">
+            <div className="flex items-center justify-center gap-2 text-center text-[clamp(0.75rem,4vw,1.5625rem)] font-medium lowercase text-black">
               <span className="typing-line">
                 Hey, welcome to my portfolio page
               </span>
@@ -58,42 +67,29 @@ export default function Home() {
           className="page-shell pb-8 pt-12"
           data-reveal="section"
         >
-          <div className="relative overflow-hidden rounded-t-2xl bg-black md:min-h-[520px]">
-            <div className="pointer-events-none absolute bottom-12 right-12 z-20 hidden lg:block">
-              <Image
-                src="/figma/intro-icon.svg"
-                alt=""
-                width={93}
-                height={93}
-              />
+          <div className="intro-panel relative overflow-hidden rounded-t-2xl bg-black">
+            <div className="intro-motion-layer" aria-hidden="true">
+              <span />
+              <span />
+              <span />
             </div>
-            <div className="reveal-group relative z-10 grid gap-12 p-6 md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] md:items-center md:p-12 lg:p-16">
-              <div
-                className="relative mx-auto w-full max-w-[691px] md:mx-0"
-                data-reveal="soft"
-                style={{ "--reveal-delay": "80ms" } as CSSProperties}
-              >
+            <div className="reveal-group relative z-10 grid min-h-[520px] gap-12 p-6 md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] md:items-center md:p-12 lg:min-h-[640px] lg:p-16">
+              <div className="relative mx-auto w-full max-w-[691px] md:mx-0">
                 <IntroMedia videoSrc="/figma/intro-generated.mp4" />
-                <Image
-                  src="/figma/intro-decoration.svg"
-                  alt=""
-                  width={938}
-                  height={566}
-                  className="pointer-events-none absolute -bottom-8 left-1/2 hidden w-[min(100%,520px)] -translate-x-1/3 md:block"
-                />
-                <Image
-                  src="/figma/intro-icon.svg"
-                  alt=""
-                  width={46}
-                  height={46}
-                  className="scribble-traveler pointer-events-none hidden md:block"
-                />
+                <div
+                  className="intro-illustration-badge"
+                  aria-hidden="true"
+                >
+                  <span className="intro-illustration-mark">
+                    <span />
+                    <span />
+                    <span />
+                    <span />
+                    <span />
+                  </span>
+                </div>
               </div>
-              <div
-                className="relative z-10 flex flex-col items-center gap-6 text-center text-white md:items-start md:text-left"
-                data-reveal
-                style={{ "--reveal-delay": "160ms" } as CSSProperties}
-              >
+              <div className="relative z-10 flex flex-col items-center gap-6 text-center text-white md:items-start md:text-left">
                 <p className="max-w-[606px] text-[clamp(1.75rem,4vw,3.125rem)] font-medium leading-[1.05]">
                   I am all about deep dives and strange scapes
                 </p>
@@ -121,18 +117,20 @@ export default function Home() {
 
         <section
           id="works"
-          className="bg-[linear-gradient(181deg,#fff_40.67%,#fefbf0_22.49%,#840be9_105.44%)] px-6 py-16"
-          data-reveal="section"
+          className="bg-[linear-gradient(181deg,#fff_40.67%,#fefbf0_22.49%,#840be9_105.44%)] px-6 py-10 md:py-12"
         >
-          <div className="reveal-group mx-auto grid max-w-[1920px] gap-8 lg:grid-cols-3">
-            {Array.from({ length: 6 }).map((_, i) => (
+          <div className="reveal-group mx-auto grid max-w-[1920px] gap-5 md:gap-6 lg:grid-cols-3 lg:gap-8">
+            {selectedWorks.map((project, i) => (
               <article
-                key={i}
-                className="relative flex min-h-[420px] flex-col justify-end rounded-xl bg-white md:min-h-[520px] lg:min-h-[729px]"
-                data-reveal="soft"
+                key={project.slug}
+                className="selected-work-card relative flex min-h-[240px] flex-col justify-between overflow-hidden rounded-xl border border-black/10 bg-white p-5 shadow-[0_18px_56px_rgba(15,15,15,0.08)] sm:min-h-[260px] md:min-h-[300px] md:p-6 lg:min-h-[340px] xl:min-h-[380px]"
                 style={{ "--reveal-delay": `${i * 70}ms` } as CSSProperties}
               >
-                <div className="absolute bottom-6 left-6 flex items-center gap-2">
+                <div className="selected-work-card__wash" aria-hidden="true" />
+                <div className="relative z-10 flex items-start justify-between gap-4">
+                  <span className="text-[15px] font-normal uppercase leading-[18px] tracking-[-0.6px] text-[#6b6b6b]">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
                   <Image
                     src="/figma/work-arrow.svg"
                     alt=""
@@ -140,10 +138,24 @@ export default function Home() {
                     height={17}
                     className="shrink-0"
                   />
-                  <span className="text-[43px] font-bold leading-[31px] text-black">
-                    O WA
-                  </span>
                 </div>
+                <div className="relative z-10 flex flex-1 items-center">
+                  <div className="flex items-center gap-3">
+                    <Image
+                      src="/figma/work-arrow.svg"
+                      alt=""
+                      width={15}
+                      height={17}
+                      className="shrink-0"
+                    />
+                    <span className="max-w-[16ch] text-[clamp(1.5rem,3vw,2.7rem)] font-bold leading-[0.92] text-black">
+                      {project.title}
+                    </span>
+                  </div>
+                </div>
+                <p className="relative z-10 max-w-[22ch] text-[15px] font-normal uppercase leading-[18px] tracking-[-0.6px] text-[#6b6b6b]">
+                  Selected project
+                </p>
               </article>
             ))}
           </div>

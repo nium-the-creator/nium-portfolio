@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 type MexicoCityClockProps = {
   compact?: boolean;
+  mobile?: boolean;
 };
 
 const nigerianTimeFormatter = new Intl.DateTimeFormat("en-US", {
@@ -14,7 +15,14 @@ const nigerianTimeFormatter = new Intl.DateTimeFormat("en-US", {
   hour12: true,
 });
 
-export function MexicoCityClock({ compact }: MexicoCityClockProps) {
+const nigerianMobileTimeFormatter = new Intl.DateTimeFormat("en-US", {
+  timeZone: "Africa/Lagos",
+  hour: "2-digit",
+  minute: "2-digit",
+  hour12: true,
+});
+
+export function MexicoCityClock({ compact, mobile }: MexicoCityClockProps) {
   const [now, setNow] = useState(() => new Date());
 
   useEffect(() => {
@@ -22,12 +30,14 @@ export function MexicoCityClock({ compact }: MexicoCityClockProps) {
     return () => clearInterval(id);
   }, []);
 
-  const formatted = nigerianTimeFormatter.format(now);
+  const formatted = mobile
+    ? nigerianMobileTimeFormatter.format(now)
+    : nigerianTimeFormatter.format(now);
 
   return (
     <span
       className={`font-normal leading-[18px] tracking-[-0.6px] text-[#0f0f0f] tabular-nums ${
-        compact ? "text-[15px]" : "text-[21px]"
+        mobile ? "text-[11px]" : compact ? "text-[15px]" : "text-[21px]"
       }`}
     >
       LAGOS {formatted}

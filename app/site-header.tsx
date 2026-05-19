@@ -27,8 +27,11 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-50 bg-[#fafaf8]/95 backdrop-blur-sm">
-      <div className="page-shell grid grid-cols-[1fr_auto_1fr] items-center gap-4">
-        <div className="flex items-center py-6">
+      <div className="page-shell grid grid-cols-[1fr_auto_1fr] items-center gap-3">
+        <div className="col-start-1 row-start-1 flex items-center justify-start py-6 md:hidden">
+          <MexicoCityClock compact mobile />
+        </div>
+        <div className="col-start-2 row-start-1 flex items-center justify-center py-6 md:col-start-1 md:justify-start">
           <Link
             href="/"
             className="text-[15px] font-extrabold uppercase leading-[18px] tracking-[-0.6px]"
@@ -37,7 +40,7 @@ export function SiteHeader() {
           </Link>
         </div>
         <nav
-          className="hidden items-center justify-center gap-6 whitespace-nowrap py-6 md:flex lg:gap-8"
+          className="col-start-2 row-start-1 hidden items-center justify-center gap-6 whitespace-nowrap py-6 md:flex lg:gap-8"
           aria-label="Primary"
         >
           {nav.map((item) => (
@@ -52,8 +55,8 @@ export function SiteHeader() {
             </Link>
           ))}
         </nav>
-        <div className="flex items-center justify-end gap-4 py-6">
-          <div className="hidden sm:block">
+        <div className="col-start-3 row-start-1 flex items-center justify-end gap-4 py-6">
+          <div className="hidden md:block">
             <MexicoCityClock compact />
           </div>
           <button
@@ -84,7 +87,6 @@ export function SiteHeader() {
               {item.label}
             </Link>
           ))}
-          <MexicoCityClock compact />
         </nav>
       ) : null}
     </header>

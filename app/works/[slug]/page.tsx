@@ -8,20 +8,25 @@ const PROJECTS_DATA = {
   "the-clarity-table": {
     title: "The Clarity Table",
     services: ["Brand Identity Design", "Brand Strategy"],
-    client: "The Clarity Table",
+    client: "Oaihimire Osezua",
     location: "Benin, Nigeria",
     year: "2026",
     credits: "nil",
     identitySystems: true,
     liveSiteUrl: "#",
-    info: "Nopal Tech, a sustainable agriculture SaaS startup, needed a future forward brand identity. I designed a clean, modern logo, visual system for presentations and pitch decks, and website assets that helped position them as leaders in their field.",
+    galleryUrl: "/works/the-clarity-table/gallery",
+    info: "The Clarity Table is a faith-rooted podcast for young adults navigating personal development, discipline, and intentional living. I developed the brand strategy, identity, and campaign for a space where people hear real conversations from voices their own age - grounded in a God-centered approach.",
     heroImage:
       "https://www.figma.com/api/mcp/asset/457183d5-c93a-4704-88c6-5441d91b34c3",
     quote: "Clarity for the raging mind-the calm",
+    quoteBody:
+      "A faith-rooted podcast identity shaped around honest conversations, practical growth, and a visual system that feels youthful without losing spiritual depth.",
+    challengeLabel: "The Search",
     challenge:
-      "Nopal Tech, a sustainable agriculture SaaS startup, needed a future forward brand identity. I designed a clean, modern logo, visual system for presentations and pitch decks, and website assets that helped position them as leaders in their field.",
+      "Osezua came with a vision: a podcast that held space for young adults asking real questions about growth, faith, and how to live with intention. The audience - teens and young adults - needed to see themselves in the brand. It had to feel vibrant and contemporary without losing the spiritual weight behind it. The challenge was building an identity that could carry both the energy of youth culture and the grounded wisdom of a God-centered worldview.",
+    howAddressedLabel: "The Table",
     howAddressed:
-      "Nopal Tech, a sustainable agriculture SaaS startup, needed a future forward brand identity. I designed a clean, modern logo, visual system for presentations and pitch decks, and website assets that helped position them as leaders in their field.",
+      "I developed a brand strategy and identity that positioned The Clarity Table as a gathering - not just a show. Drawing from the Proverbs principle of counsel, the visual and verbal language was built to feel like an invitation to sit down, speak freely, and leave with something. The campaign extended this into how the podcast would show up in the world - creating a consistent presence that could speak directly to a generation hungry for honest, faith-rooted conversation.",
     relatedProjects: [
       {
         title: "Jefe de Corte (Cutboss)",
@@ -198,7 +203,7 @@ export default async function WorkDetailPage({ params }: Props) {
               {project.quote}
             </h2>
             <p className="flex-1 text-[clamp(1.125rem,2.5vw,2rem)] font-normal leading-[50px] text-white opacity-60">
-              Nopal Tech, a sustainable agriculture SaaS startup, needed a future forward brand identity designed in clean, modern style — a visual system for presentations and pitch decks, and website assets that helped position them as leaders in their field.
+              {project.quoteBody}
             </p>
           </div>
 
@@ -206,7 +211,7 @@ export default async function WorkDetailPage({ params }: Props) {
           <div className="mx-auto flex w-full max-w-[1920px] flex-col gap-12 px-10 pb-20 md:flex-row md:gap-12">
             <div className="flex flex-1 flex-col gap-3">
               <p className="text-[clamp(0.875rem,1.25vw,1.5rem)] font-extrabold uppercase leading-[2rem] tracking-[-0.6px] text-[#ffe100]">
-                The Challenge
+                {project.challengeLabel}
               </p>
               <p className="text-[clamp(1rem,2vw,2rem)] font-medium leading-[50px] tracking-[-0.64px] text-white">
                 {project.challenge}
@@ -214,7 +219,7 @@ export default async function WorkDetailPage({ params }: Props) {
             </div>
             <div className="flex flex-1 flex-col gap-3">
               <p className="text-[clamp(0.875rem,1.25vw,1.5rem)] font-extrabold uppercase leading-[2rem] tracking-[-0.6px] text-[#ffe100]">
-                How I addressed it
+                {project.howAddressedLabel}
               </p>
               <p className="text-[clamp(1rem,2vw,2rem)] font-medium leading-[50px] tracking-[-0.64px] text-white">
                 {project.howAddressed}
@@ -224,9 +229,17 @@ export default async function WorkDetailPage({ params }: Props) {
 
           {/* In the wild gallery */}
           <div className="bg-[#5cf03e] py-9">
-            <p className="mb-12 text-center text-[clamp(1.5rem,3vw,3.0625rem)] font-semibold uppercase leading-none tracking-[-1.568px] text-white">
-              Clarity in Reality — The brand out in the wild!
-            </p>
+            <div className="mx-auto mb-12 flex w-full max-w-[1920px] flex-col gap-6 px-10 text-white md:flex-row md:items-end md:justify-between">
+              <p className="max-w-5xl text-center text-[clamp(1.5rem,3vw,3.0625rem)] font-semibold uppercase leading-none tracking-[-1.568px] md:text-left">
+                Clarity in Reality - The brand out in the wild!
+              </p>
+              <Link
+                href={project.galleryUrl}
+                className="w-fit shrink-0 text-[clamp(1rem,1.5vw,1.5625rem)] font-medium uppercase leading-tight tracking-[-0.64px] underline decoration-solid transition-opacity hover:opacity-70"
+              >
+                View gallery
+              </Link>
+            </div>
             <div className="mx-auto grid w-full max-w-[1920px] grid-cols-1 gap-10 px-10 md:grid-cols-2">
               {Array.from({ length: 5 }).map((_, i) => (
                 <div
