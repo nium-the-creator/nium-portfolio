@@ -43,7 +43,7 @@ const PROJECTS: Project[] = [
   {
     title: "G.R.I.T.",
     slug: "grit",
-    tagline: "Growth rooted in tenacity",
+    tagline: "Built to move — a brand for those who won't stop regardless",
     filterIds: ["art-direction", "brand-strategy", "campaign"],
   },
   {
@@ -107,11 +107,11 @@ export function WorksView() {
   };
 
   return (
-    <div className="bg-[#fafaf8] text-[#0f0f0f]">
+    <div className="bg-background text-foreground">
       <section className="mx-auto w-full max-w-[1920px] px-5 pb-16 pt-24 md:pb-[60px] md:pt-[160px]">
         <div className="flex flex-col gap-10">
           <div className="flex flex-col gap-5">
-            <h1 className="flex flex-wrap gap-x-2 text-[clamp(2.5rem,8vw,4rem)] font-medium uppercase leading-[1] tracking-[-5.12px] text-[#0f0f0f]">
+            <h1 className="flex flex-wrap gap-x-2 text-[clamp(2.5rem,8vw,4rem)] font-medium uppercase leading-[1] tracking-[-5.12px] text-foreground">
               <span>All</span>
               <span>works</span>
             </h1>
@@ -122,12 +122,12 @@ export function WorksView() {
                   type="button"
                   onClick={() => setFilterAndReset("all")}
                   className={`relative py-1 text-left text-[15px] font-normal uppercase leading-[18px] tracking-[-0.6px] transition-colors ${
-                    filter === "all" ? "text-[#0f0f0f]" : "text-[#6b6b6b]"
+                    filter === "all" ? "text-foreground" : "text-muted"
                   }`}
                 >
                   All works
                   {filter === "all" ? (
-                    <span className="absolute inset-x-0 bottom-0 border-b border-[#0f0f0f]" />
+                    <span className="absolute inset-x-0 bottom-0 border-b border-accent" />
                   ) : null}
                 </button>
               </div>
@@ -138,12 +138,12 @@ export function WorksView() {
                     type="button"
                     onClick={() => setFilterAndReset(f.id)}
                     className={`relative py-1 text-left text-[15px] font-normal uppercase leading-[18px] tracking-[-0.6px] transition-colors ${
-                      filter === f.id ? "text-[#0f0f0f]" : "text-[#6b6b6b]"
+                      filter === f.id ? "text-foreground" : "text-muted"
                     }`}
                   >
                     {f.label}
                     {filter === f.id ? (
-                      <span className="absolute inset-x-0 bottom-0 border-b border-[#0f0f0f]" />
+                      <span className="absolute inset-x-0 bottom-0 border-b border-accent" />
                     ) : null}
                   </button>
                 ))}
@@ -156,7 +156,7 @@ export function WorksView() {
               <article key={project.title}>
                 <Link
                   href={`/works/${project.slug}`}
-                  className="group block focus:outline-none focus-visible:ring-2 focus-visible:ring-[#840be9] focus-visible:ring-offset-2 focus-visible:ring-offset-[#fafaf8]"
+                  className="group block focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 >
                   <div className="relative aspect-[865/982] w-full overflow-hidden bg-[#121212]">
                     <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/95 via-black/55 to-transparent p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
@@ -180,7 +180,7 @@ export function WorksView() {
                       height={52}
                       className="shrink-0"
                     />
-                    <span className="text-[clamp(1rem,3.5vw,2.0625rem)] font-bold leading-[0.95] text-black">
+                    <span className="text-[clamp(1rem,3.5vw,2.0625rem)] font-bold leading-[0.95] text-foreground">
                       {project.title}
                     </span>
                   </div>
@@ -193,11 +193,11 @@ export function WorksView() {
         {pageCount > 1 ? (
           <>
             <div
-              className="my-16 border-t border-[#e2e2e2] md:my-20"
+              className="my-16 border-t border-divider md:my-20"
               aria-hidden
             />
             <div className="flex justify-center">
-              <div className="flex items-center gap-4 rounded-[41px] bg-white px-4 py-2 sm:gap-6 sm:px-4">
+              <div className="flex items-center gap-4 rounded-[41px] bg-card px-4 py-2 sm:gap-6 sm:px-4">
                 <button
                   type="button"
                   aria-label="Previous page"
@@ -221,7 +221,7 @@ export function WorksView() {
                         type="button"
                         onClick={() => setPage(n)}
                         className={`flex size-[72px] items-center justify-center rounded-[71px] text-[clamp(3rem,8vw,4.875rem)] font-medium text-white sm:size-[105px] ${
-                          safePage === n ? "bg-[#840be9]" : "bg-transparent"
+                          safePage === n ? "bg-accent" : "bg-transparent"
                         }`}
                       >
                         {n}

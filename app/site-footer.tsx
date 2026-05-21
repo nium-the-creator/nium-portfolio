@@ -8,19 +8,19 @@ type SiteFooterProps = {
 
 export function SiteFooter({ id = "contact", compact }: SiteFooterProps) {
   const linkClass = compact
-    ? "text-[15px] font-normal uppercase leading-[18px] tracking-[-0.6px] text-[#0f0f0f] transition-opacity hover:opacity-65"
-    : "text-[19px] font-normal uppercase leading-[18px] tracking-[-0.6px] text-[#0f0f0f] transition-opacity hover:opacity-65";
+    ? "text-[15px] font-normal uppercase leading-[18px] tracking-[-0.6px] text-foreground transition-opacity hover:opacity-65"
+    : "text-[19px] font-normal uppercase leading-[18px] tracking-[-0.6px] text-foreground transition-opacity hover:opacity-65";
   const headingClass = compact
-    ? "flex flex-wrap gap-x-2 text-[clamp(1.75rem,4vw,2.4rem)] font-semibold uppercase leading-none tracking-[-3.12px] text-[#0f0f0f]"
-    : "flex flex-wrap gap-x-2 text-[clamp(2rem,5vw,2.75rem)] font-semibold uppercase leading-10 tracking-[-3.2px] text-[#0f0f0f]";
+    ? "flex flex-wrap gap-x-2 text-[clamp(1.75rem,4vw,2.4rem)] font-semibold uppercase leading-none tracking-[-3.12px] text-foreground"
+    : "flex flex-wrap gap-x-2 text-[clamp(2rem,5vw,2.75rem)] font-semibold uppercase leading-10 tracking-[-3.2px] text-foreground";
   const copyClass = compact
-    ? "text-[15px] font-normal uppercase leading-[18px] tracking-[-0.6px] text-[#0f0f0f]"
-    : "text-[19px] font-normal uppercase leading-[18px] tracking-[-0.6px] text-[#0f0f0f]";
+    ? "text-[15px] font-normal uppercase leading-[18px] tracking-[-0.6px] text-foreground"
+    : "text-[19px] font-normal uppercase leading-[18px] tracking-[-0.6px] text-foreground";
 
   return (
     <footer
       id={id}
-      className="mt-auto bg-[#fafaf8] section-top section-bottom"
+      className="mt-auto bg-background section-top section-bottom"
       data-reveal
     >
       <div className="page-shell space-y-8">

@@ -4,7 +4,7 @@ import { WorksView } from "./works-view";
 
 export default function WorksPage() {
   return (
-    <div className="relative flex min-h-full flex-col bg-[#fafaf8]">
+    <div className="relative flex min-h-full flex-col bg-background">
       <SiteHeader />
       <WorksView />
       <SiteFooter compact />

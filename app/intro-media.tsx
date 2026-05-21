@@ -34,7 +34,7 @@ export function IntroMedia({ videoSrc }: IntroMediaProps) {
   return (
     <div
       ref={rootRef}
-      className="relative aspect-[691/482] w-full overflow-hidden rounded-[33px] bg-white"
+      className="relative aspect-[691/482] w-full overflow-hidden rounded-[33px] bg-card"
     >
       {videoSrc ? (
         <video
@@ -55,7 +55,7 @@ export function IntroMedia({ videoSrc }: IntroMediaProps) {
       ) : null}
 
       <div
-        className={`absolute inset-0 bg-white transition-opacity duration-300 ${
+        className={`absolute inset-0 bg-card transition-opacity duration-300 ${
           videoReady ? "opacity-0" : "opacity-100"
         }`}
         aria-hidden="true"

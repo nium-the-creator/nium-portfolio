@@ -36,7 +36,7 @@ export function MexicoCityClock({ compact, mobile }: MexicoCityClockProps) {
 
   return (
     <span
-      className={`font-normal leading-[18px] tracking-[-0.6px] text-[#0f0f0f] tabular-nums ${
+      className={`font-normal leading-[18px] tracking-[-0.6px] text-foreground tabular-nums ${
         mobile ? "text-[11px]" : compact ? "text-[15px]" : "text-[21px]"
       }`}
     >

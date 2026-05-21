@@ -28,12 +28,12 @@ const ARCHIVE_ITEMS: ArchiveItem[] = [
 
 export default function ArchivesPage() {
   return (
-    <div className="relative flex min-h-screen flex-col bg-[#fafaf8] text-[#0f0f0f]">
+    <div className="relative flex min-h-screen flex-col bg-background text-foreground">
       <SiteHeader />
 
       <main className="flex-1">
         <section
-          className="page-shell border-t border-[#e2e2e2] pb-10 pt-24 md:pt-32 lg:pt-40"
+          className="page-shell border-t border-divider pb-10 pt-24 md:pt-32 lg:pt-40"
           data-reveal="section"
         >
           <div className="flex flex-col gap-5">
@@ -51,7 +51,7 @@ export default function ArchivesPage() {
                   style={{ "--reveal-delay": `${index * 55}ms` } as CSSProperties}
                 >
                   <div
-                    className="relative w-full overflow-hidden bg-[#f4f4f0]"
+                    className="relative w-full overflow-hidden bg-card"
                     style={{ aspectRatio: item.ratio }}
                   >
                     <Image

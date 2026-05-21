@@ -26,7 +26,7 @@ export function SiteHeader() {
           : href === "/" && pathname === "/";
 
   return (
-    <header className="sticky top-0 z-50 bg-[#fafaf8]/95 backdrop-blur-sm">
+    <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm">
       <div className="page-shell grid grid-cols-[1fr_auto_1fr] items-center gap-3">
         <div className="col-start-1 row-start-1 flex items-center justify-start py-6 md:hidden">
           <MexicoCityClock compact mobile />
@@ -66,15 +66,15 @@ export function SiteHeader() {
             aria-label="Toggle navigation menu"
             onClick={() => setMenuOpen((open) => !open)}
           >
-            <span className="h-px w-5 bg-[#0f0f0f]" />
-            <span className="h-px w-5 bg-[#0f0f0f]" />
-            <span className="h-px w-5 bg-[#0f0f0f]" />
+            <span className="h-px w-5 bg-foreground" />
+            <span className="h-px w-5 bg-foreground" />
+            <span className="h-px w-5 bg-foreground" />
           </button>
         </div>
       </div>
       {menuOpen ? (
         <nav
-          className="page-shell flex flex-col gap-4 border-t border-[#e2e2e2] pb-6 pt-4 md:hidden"
+          className="page-shell flex flex-col gap-4 border-t border-divider pb-6 pt-4 md:hidden"
           aria-label="Mobile primary"
         >
           {nav.map((item) => (

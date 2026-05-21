@@ -25,7 +25,7 @@ const selectedWorks = [
 
 export default function Home() {
   return (
-    <div className="relative flex min-h-full flex-col bg-[#fafaf8] text-[#0f0f0f]">
+    <div className="relative flex min-h-full flex-col bg-background text-foreground">
       <SiteHeader />
 
       <main className="flex-1">
@@ -35,32 +35,32 @@ export default function Home() {
           data-reveal="section"
         >
           <div className="flex w-full max-w-xl justify-center">
-            <div className="flex items-center justify-center gap-2 text-center text-[clamp(0.75rem,4vw,1.5625rem)] font-medium lowercase text-black">
+            <div className="flex items-center justify-center gap-2 text-center text-[clamp(0.75rem,4vw,1.5625rem)] font-medium lowercase text-foreground">
               <span className="typing-line">
                 Hey, welcome to my portfolio page
               </span>
             </div>
           </div>
 
-          <p className="text-[20px] font-medium uppercase leading-normal text-black">
+          <p className="text-[20px] font-medium uppercase leading-normal text-foreground">
             i am
           </p>
 
           <h1 className="flex flex-col items-center gap-2 px-2 xl:flex-row xl:gap-6">
-            <span className="text-center text-[clamp(3.5rem,14vw,10.3rem)] font-medium uppercase leading-[0.85] tracking-[-0.06em] text-[#0f0f0f]">
+            <span className="text-center text-[clamp(3.5rem,14vw,10.3rem)] font-medium uppercase leading-[0.85] tracking-[-0.06em] text-foreground">
               adonis
             </span>
-            <span className="text-center text-[clamp(3.5rem,14vw,10.3rem)] font-medium uppercase leading-[0.85] tracking-[-0.06em] text-[#0f0f0f]">
+            <span className="text-center text-[clamp(3.5rem,14vw,10.3rem)] font-medium uppercase leading-[0.85] tracking-[-0.06em] text-foreground">
               dominium
             </span>
           </h1>
 
-          <p className="max-w-xl text-[20px] font-normal uppercase leading-[18px] tracking-[-0.6px] text-[#0f0f0f]">
+          <p className="max-w-xl text-[20px] font-normal uppercase leading-[18px] tracking-[-0.6px] text-foreground">
             Creative designer and visual strategist
           </p>
         </section>
 
-        <div className="h-16 w-full bg-[#e2e2e2]" aria-hidden />
+        <div className="h-16 w-full bg-divider" aria-hidden />
 
         <section
           id="intro"
@@ -102,13 +102,13 @@ export default function Home() {
           </div>
 
           <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-            <h2 className="flex flex-wrap gap-x-2 text-[clamp(2rem,5vw,2.8rem)] font-semibold uppercase leading-10 tracking-[-3.2px] text-[#0f0f0f]">
+            <h2 className="flex flex-wrap gap-x-2 text-[clamp(2rem,5vw,2.8rem)] font-semibold uppercase leading-10 tracking-[-3.2px] text-foreground">
               <span>Selected</span>
               <span>Works</span>
             </h2>
             <Link
               href="/works"
-              className="relative w-fit text-[20px] font-normal uppercase leading-[18px] tracking-[-0.6px] text-[#0f0f0f] after:absolute after:inset-x-0 after:bottom-0 after:border-b after:border-[#0f0f0f]"
+              className="relative w-fit text-[20px] font-normal uppercase leading-[18px] tracking-[-0.6px] text-foreground after:absolute after:inset-x-0 after:bottom-0 after:border-b after:border-foreground"
             >
               See all works
             </Link>
@@ -117,18 +117,18 @@ export default function Home() {
 
         <section
           id="works"
-          className="bg-[linear-gradient(181deg,#fff_40.67%,#fefbf0_22.49%,#840be9_105.44%)] px-6 py-10 md:py-12"
+          className="bg-[linear-gradient(181deg,#0B0B0D_40.67%,#1A1F24_72%,rgba(58,110,165,0.15)_105.44%)] px-6 py-10 md:py-12"
         >
           <div className="reveal-group mx-auto grid max-w-[1920px] gap-5 md:gap-6 lg:grid-cols-3 lg:gap-8">
             {selectedWorks.map((project, i) => (
               <article
                 key={project.slug}
-                className="selected-work-card relative flex min-h-[240px] flex-col justify-between overflow-hidden rounded-xl border border-black/10 bg-white p-5 shadow-[0_18px_56px_rgba(15,15,15,0.08)] sm:min-h-[260px] md:min-h-[300px] md:p-6 lg:min-h-[340px] xl:min-h-[380px]"
+              className="selected-work-card relative flex min-h-[240px] flex-col justify-between overflow-hidden rounded-xl border border-divider bg-card p-5 shadow-[0_18px_56px_rgba(0,0,0,0.3)] sm:min-h-[260px] md:min-h-[300px] md:p-6 lg:min-h-[340px] xl:min-h-[380px]"
                 style={{ "--reveal-delay": `${i * 70}ms` } as CSSProperties}
               >
                 <div className="selected-work-card__wash" aria-hidden="true" />
                 <div className="relative z-10 flex items-start justify-between gap-4">
-                  <span className="text-[15px] font-normal uppercase leading-[18px] tracking-[-0.6px] text-[#6b6b6b]">
+                  <span className="text-[15px] font-normal uppercase leading-[18px] tracking-[-0.6px] text-muted">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <Image
@@ -148,12 +148,12 @@ export default function Home() {
                       height={17}
                       className="shrink-0"
                     />
-                    <span className="max-w-[16ch] text-[clamp(1.5rem,3vw,2.7rem)] font-bold leading-[0.92] text-black">
+                    <span className="max-w-[16ch] text-[clamp(1.5rem,3vw,2.7rem)] font-bold leading-[0.92] text-foreground">
                       {project.title}
                     </span>
                   </div>
                 </div>
-                <p className="relative z-10 max-w-[22ch] text-[15px] font-normal uppercase leading-[18px] tracking-[-0.6px] text-[#6b6b6b]">
+                <p className="relative z-10 max-w-[22ch] text-[15px] font-normal uppercase leading-[18px] tracking-[-0.6px] text-muted">
                   Selected project
                 </p>
               </article>
@@ -166,7 +166,7 @@ export default function Home() {
           className="page-shell section-y"
           data-reveal="section"
         >
-          <h2 className="text-[clamp(2rem,4vw,3rem)] font-semibold uppercase leading-10 tracking-[-3.2px] text-[#0f0f0f]">
+          <h2 className="text-[clamp(2rem,4vw,3rem)] font-semibold uppercase leading-10 tracking-[-3.2px] text-foreground">
             Services
           </h2>
           <div className="reveal-group mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
@@ -184,8 +184,8 @@ export default function Home() {
                   className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
                   sizes="(max-width: 1024px) 100vw, 33vw"
                 />
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-white/95 via-white/40 to-transparent p-6 pt-16">
-                  <h3 className="text-[clamp(1.5rem,3vw,2.8rem)] font-medium uppercase leading-none tracking-[-1.2px] text-[#0f0f0f]">
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-card/95 via-card/40 to-transparent p-6 pt-16">
+                  <h3 className="text-[clamp(1.5rem,3vw,2.8rem)] font-medium uppercase leading-none tracking-[-1.2px] text-foreground">
                     {s.title}
                   </h3>
                 </div>
@@ -195,7 +195,7 @@ export default function Home() {
         </section>
 
         <section className="page-shell section-y" data-reveal="section">
-          <h2 className="text-[40px] font-semibold uppercase leading-10 tracking-[-3.2px] text-[#0f0f0f]">
+          <h2 className="text-[40px] font-semibold uppercase leading-10 tracking-[-3.2px] text-foreground">
             Info
           </h2>
           <div className="reveal-group mt-12 flex flex-col gap-12 lg:flex-row">
@@ -215,10 +215,10 @@ export default function Home() {
                 }
               />
               <div className="flex flex-col gap-4 sm:flex-row sm:gap-4">
-                <p className="w-full shrink-0 text-[18px] font-normal uppercase leading-[18px] tracking-[-0.6px] text-[#6b6b6b] sm:max-w-[200px] lg:max-w-[240px]">
+                <p className="w-full shrink-0 text-[18px] font-normal uppercase leading-[18px] tracking-[-0.6px] text-muted sm:max-w-[200px] lg:max-w-[240px]">
                   My background
                 </p>
-                <div className="space-y-6 text-[19px] font-medium leading-[19.2px] tracking-[-0.64px] text-[#0f0f0f]">
+                <div className="space-y-6 text-[19px] font-medium leading-[19.2px] tracking-[-0.64px] text-foreground">
                   <p>
                     I started by working across graphic design and digital visuals,
                     gradually expanding into{" "}
@@ -249,10 +249,10 @@ export default function Home() {
                 body="I design with intent first — building clear, scalable visual systems that align strategy, story, and execution."
               />
               <div className="flex flex-col gap-4 sm:flex-row sm:gap-4">
-                <p className="w-full shrink-0 text-[15px] font-normal uppercase leading-[18px] tracking-[-0.6px] text-[#6b6b6b] sm:max-w-[200px] lg:max-w-[240px]">
+                <p className="w-full shrink-0 text-[15px] font-normal uppercase leading-[18px] tracking-[-0.6px] text-muted sm:max-w-[200px] lg:max-w-[240px]">
                   Career
                 </p>
-                <ul className="space-y-4 text-[19px] font-medium leading-[19.2px] tracking-[-0.64px] text-[#0f0f0f]">
+                 <ul className="space-y-4 text-[19px] font-medium leading-[19.2px] tracking-[-0.64px] text-foreground">
                   <li>{`(2021 - 2023) Lead Designer at The Maestro's Crib`}</li>
                   <li>(2023 – 2024) Independent Brand Designer</li>
                   <li>(2024) Design Intern at Babtech Computers</li>
@@ -297,10 +297,10 @@ function InfoRow({
 }) {
   return (
     <div className="flex flex-col gap-4 sm:flex-row sm:gap-4">
-      <p className="w-full shrink-0 text-[18px] font-normal uppercase leading-[18px] tracking-[-0.6px] text-[#6b6b6b] sm:max-w-[200px] lg:max-w-[240px]">
+      <p className="w-full shrink-0 text-[18px] font-normal uppercase leading-[18px] tracking-[-0.6px] text-muted sm:max-w-[200px] lg:max-w-[240px]">
         {label}
       </p>
-      <p className="max-w-3xl text-[19px] font-medium leading-[19.2px] tracking-[-0.64px] text-[#0f0f0f]">
+      <p className="max-w-3xl text-[19px] font-medium leading-[19.2px] tracking-[-0.64px] text-foreground">
         {body}
       </p>
     </div>
