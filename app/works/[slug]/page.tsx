@@ -4,9 +4,18 @@ import { notFound } from "next/navigation";
 import { SiteFooter } from "../../site-footer";
 import { MexicoCityClock } from "../../mexico-city-clock";
 
+type RealityShot = {
+  title: string;
+  src: string;
+  alt: string;
+  layout?: "large" | "wide" | "tall" | "standard";
+  objectPosition?: string;
+};
+
 const PROJECTS_DATA = {
   "the-clarity-table": {
     title: "The Clarity Table",
+    summary: "Where clarity begins",
     services: ["Brand Identity Design", "Brand Strategy"],
     client: "Oaihimire Osezua",
     location: "Benin, Nigeria",
@@ -32,24 +41,25 @@ const PROJECTS_DATA = {
         title: "G.R.I.T.",
         slug: "/works/grit",
         description:
-          "A high-octane community brand built on bold visual cues and physical print aesthetics.",
+          "Built to move — a brand for those who won't stop regardless",
       },
       {
         title: "MANJALA CULTURE",
         slug: "/works/manjala-culture",
         description:
-          "A radical publishing and brand system designed to give visual weight to African stories.",
+          "Built from culture, made to move",
       },
       {
         title: "Zcash.me",
         slug: "/works/zcash-me",
         description:
-          "A sleek dark-mode-first payment interface crafted for effortless transactions.",
+          "Designed on a dare — clarity for a product that deserved to be understood",
       },
     ],
   },
   "grit": {
     title: "G.R.I.T.",
+    summary: "Built to move — a brand for those who won't stop regardless",
     services: ["Brand Identity Design", "Brand Strategy", "Social Media Design"],
     client: "The G.R.I.T. Community",
     location: "Nigeria",
@@ -75,24 +85,25 @@ const PROJECTS_DATA = {
         title: "THE CLARITY TABLE",
         slug: "/works/the-clarity-table",
         description:
-          "A faith-rooted podcast identity built around honest conversations and growth.",
+          "Where clarity begins",
       },
       {
         title: "RETRORAVE FESTIVALS",
         slug: "/works/retrorave-festivals",
         description:
-          "A high-energy, immersive festival campaign fusing analog textures with future-rave vibes.",
+          "Past sounds. Future nights.",
       },
       {
         title: "MANJALA CULTURE",
         slug: "/works/manjala-culture",
         description:
-          "A radical publishing and brand system designed to give visual weight to African stories.",
+          "Built from culture, made to move",
       },
     ],
   },
   "zcash-me": {
     title: "Zcash.me",
+    summary: "Designed on a dare — clarity for a product that deserved to be understood",
     services: ["UX Design"],
     client: "Zcash.me",
     location: "—",
@@ -118,24 +129,25 @@ const PROJECTS_DATA = {
         title: "IVEALTH",
         slug: "/works/ivealth",
         description:
-          "A clean, educational investment dashboard designed to make stock ownership accessible.",
+          "Invest with everyday clarity",
       },
       {
         title: "LUXURY LOFTS",
         slug: "/works/luxury-lofts",
         description:
-          "A booking portal combining elegant editorial design with physical touchpoints.",
+          "Elevated living, quietly refined",
       },
       {
         title: "G.R.I.T.",
         slug: "/works/grit",
         description:
-          "A high-octane community brand built on bold visual cues and physical print aesthetics.",
+          "Built to move — a brand for those who won't stop regardless",
       },
     ],
   },
   "luxury-lofts": {
     title: "Luxury Lofts",
+    summary: "Elevated living, quietly refined",
     services: [
       "Brand Identity Design",
       "Brand Strategy",
@@ -166,24 +178,25 @@ const PROJECTS_DATA = {
         title: "OWA",
         slug: "/works/owa",
         description:
-          "An avant-garde fashion brand blending West African heritage with premium styling.",
+          "Culture in every curve",
       },
       {
         title: "Zcash.me",
         slug: "/works/zcash-me",
         description:
-          "A sleek dark-mode-first payment interface crafted for effortless transactions.",
+          "Designed on a dare — clarity for a product that deserved to be understood",
       },
       {
         title: "IVEALTH",
         slug: "/works/ivealth",
         description:
-          "A clean, educational investment dashboard designed to make stock ownership accessible.",
+          "Invest with everyday clarity",
       },
     ],
   },
   "owa": {
     title: "OWA",
+    summary: "Culture in every curve",
     services: ["Brand Identity Design", "Campaign Management"],
     client: "Owa Fashion House",
     location: "Paris, France",
@@ -209,24 +222,25 @@ const PROJECTS_DATA = {
         title: "LUXURY LOFTS",
         slug: "/works/luxury-lofts",
         description:
-          "A booking portal combining elegant editorial design with physical touchpoints.",
+          "Elevated living, quietly refined",
       },
       {
         title: "MANJALA CULTURE",
         slug: "/works/manjala-culture",
         description:
-          "A radical publishing and brand system designed to give visual weight to African stories.",
+          "Built from culture, made to move",
       },
       {
         title: "THE CLARITY TABLE",
         slug: "/works/the-clarity-table",
         description:
-          "A faith-rooted podcast identity built around honest conversations and growth.",
+          "Where clarity begins",
       },
     ],
   },
   "manjala-culture": {
     title: "Manjala Culture",
+    summary: "Built from culture, made to move",
     services: ["Art Direction", "Brand Strategy"],
     client: "Manjala Culture Studio",
     location: "Lagos, Nigeria",
@@ -252,24 +266,25 @@ const PROJECTS_DATA = {
         title: "G.R.I.T.",
         slug: "/works/grit",
         description:
-          "A high-octane community brand built on bold visual cues and physical print aesthetics.",
+          "Built to move — a brand for those who won't stop regardless",
       },
       {
         title: "OWA",
         slug: "/works/owa",
         description:
-          "An avant-garde fashion brand blending West African heritage with premium styling.",
+          "Culture in every curve",
       },
       {
         title: "RETRORAVE FESTIVALS",
         slug: "/works/retrorave-festivals",
         description:
-          "A high-energy, immersive festival campaign fusing analog textures with future-rave vibes.",
+          "Past sounds. Future nights.",
       },
     ],
   },
   "ivealth": {
     title: "Ivealth",
+    summary: "Invest with everyday clarity",
     services: ["UI/UX", "Brand Identity Design"],
     client: "Ivealth Group",
     location: "Delaware, USA",
@@ -295,24 +310,25 @@ const PROJECTS_DATA = {
         title: "Zcash.me",
         slug: "/works/zcash-me",
         description:
-          "A sleek dark-mode-first payment interface crafted for effortless transactions.",
+          "Designed on a dare — clarity for a product that deserved to be understood",
       },
       {
         title: "LUXURY LOFTS",
         slug: "/works/luxury-lofts",
         description:
-          "A booking portal combining elegant editorial design with physical touchpoints.",
+          "Elevated living, quietly refined",
       },
       {
         title: "THE CLARITY TABLE",
         slug: "/works/the-clarity-table",
         description:
-          "A faith-rooted podcast identity built around honest conversations and growth.",
+          "Where clarity begins",
       },
     ],
   },
   "retrorave-festivals": {
     title: "Retrorave Festivals",
+    summary: "Past sounds. Future nights.",
     services: [
       "Brand Identity Design",
       "Brand Strategy",
@@ -343,23 +359,382 @@ const PROJECTS_DATA = {
         title: "MANJALA CULTURE",
         slug: "/works/manjala-culture",
         description:
-          "A radical publishing and brand system designed to give visual weight to African stories.",
+          "Built from culture, made to move",
       },
       {
         title: "G.R.I.T.",
         slug: "/works/grit",
         description:
-          "A high-octane community brand built on bold visual cues and physical print aesthetics.",
+          "Built to move — a brand for those who won't stop regardless",
       },
       {
         title: "Zcash.me",
         slug: "/works/zcash-me",
         description:
-          "A sleek dark-mode-first payment interface crafted for effortless transactions.",
+          "Designed on a dare — clarity for a product that deserved to be understood",
       },
     ],
   },
 } as const;
+
+type ProjectSlug = keyof typeof PROJECTS_DATA;
+
+const DEFAULT_REALITY_SHOTS: RealityShot[] = [
+  {
+    title: "Hero application",
+    src: "/figma/service-0.png",
+    alt: "Brand application image",
+    layout: "large",
+  },
+  {
+    title: "Campaign detail",
+    src: "/figma/archive-001.jpg",
+    alt: "Campaign detail image",
+    layout: "tall",
+  },
+  {
+    title: "Visual system",
+    src: "/figma/service-1.png",
+    alt: "Visual system image",
+  },
+  {
+    title: "Texture study",
+    src: "/figma/archive-003.jpg",
+    alt: "Texture study image",
+  },
+  {
+    title: "Applied touchpoint",
+    src: "/figma/service-4.png",
+    alt: "Applied touchpoint image",
+    layout: "wide",
+  },
+  {
+    title: "Digital moment",
+    src: "/figma/service-5.png",
+    alt: "Digital moment image",
+    layout: "tall",
+  },
+  {
+    title: "Campaign rollout",
+    src: "/figma/service-3.png",
+    alt: "Campaign rollout image",
+  },
+  {
+    title: "Editorial direction",
+    src: "/figma/archive-008.jpg",
+    alt: "Editorial direction image",
+  },
+  {
+    title: "Reference wall",
+    src: "/figma/archive-002.png",
+    alt: "Reference wall image",
+    layout: "wide",
+  },
+  {
+    title: "Brand atmosphere",
+    src: "/figma/archive-005.jpg",
+    alt: "Brand atmosphere image",
+  },
+];
+
+const REALITY_SHOTS: Partial<Record<ProjectSlug, RealityShot[]>> = {
+  "the-clarity-table": [
+    {
+      title: "Table direction",
+      src: "/figma/service-0.png",
+      alt: "The Clarity Table brand identity application",
+      layout: "large",
+    },
+    {
+      title: "Gathering mood",
+      src: "/figma/archive-001.jpg",
+      alt: "The Clarity Table gathering mood image",
+      layout: "tall",
+    },
+    {
+      title: "Youth reference",
+      src: "/figma/archive-002.png",
+      alt: "Youthful visual reference for The Clarity Table",
+    },
+    {
+      title: "Conversation tone",
+      src: "/figma/archive-003.jpg",
+      alt: "Conversation tone image for The Clarity Table",
+    },
+    {
+      title: "Campaign texture",
+      src: "/figma/archive-004.jpg",
+      alt: "Campaign texture image for The Clarity Table",
+    },
+    {
+      title: "Faith cue",
+      src: "/figma/service-1.png",
+      alt: "Faith-rooted art direction image for The Clarity Table",
+      layout: "wide",
+    },
+    {
+      title: "Content prompt",
+      src: "/figma/service-2.png",
+      alt: "Content prompt image for The Clarity Table",
+      layout: "tall",
+    },
+    {
+      title: "Launch graphic",
+      src: "/figma/service-3.png",
+      alt: "Launch graphic for The Clarity Table",
+    },
+    {
+      title: "Printed moment",
+      src: "/figma/service-4.png",
+      alt: "Printed brand moment for The Clarity Table",
+    },
+    {
+      title: "Digital rollout",
+      src: "/figma/service-5.png",
+      alt: "Digital rollout image for The Clarity Table",
+      layout: "wide",
+    },
+    {
+      title: "Archive cut",
+      src: "/figma/archive-006.jpg",
+      alt: "Archive cut for The Clarity Table",
+    },
+    {
+      title: "Closing detail",
+      src: "/figma/archive-008.jpg",
+      alt: "Closing detail image for The Clarity Table",
+    },
+  ],
+  "grit": [
+    {
+      title: "Typography lockup",
+      src: "/figma/service-1.png",
+      alt: "G.R.I.T. community typography lockup",
+      layout: "large",
+    },
+    {
+      title: "Raw texture board",
+      src: "/figma/archive-005.jpg",
+      alt: "Raw grunge texture board for G.R.I.T.",
+      layout: "tall",
+    },
+    {
+      title: "Community guidelines",
+      src: "/figma/archive-006.jpg",
+      alt: "G.R.I.T. community brand guidelines sheet",
+    },
+    {
+      title: "Streetwear graphics",
+      src: "/figma/archive-007.jpg",
+      alt: "G.R.I.T. streetwear print mockup",
+      layout: "wide",
+    },
+    {
+      title: "Zine layouts",
+      src: "/figma/archive-008.jpg",
+      alt: "G.R.I.T. publication layout details",
+      layout: "tall",
+    },
+    {
+      title: "Process notes",
+      src: "/figma/archive-001.jpg",
+      alt: "Design process notes for G.R.I.T.",
+    },
+  ],
+  "zcash-me": [
+    {
+      title: "Transactions dashboard",
+      src: "/figma/service-5.png",
+      alt: "Zcash.me transactions dashboard screen",
+      layout: "large",
+    },
+    {
+      title: "Sitemap & UX wires",
+      src: "/figma/archive-003.jpg",
+      alt: "Zcash.me initial wireframes layout map",
+      layout: "tall",
+    },
+    {
+      title: "Color system test",
+      src: "/figma/archive-004.jpg",
+      alt: "Sleek dark mode color palette configuration",
+    },
+    {
+      title: "Peer-to-peer widget",
+      src: "/figma/archive-002.png",
+      alt: "Zcash.me instant peer-to-peer transaction widget",
+      layout: "wide",
+    },
+    {
+      title: "Flow study",
+      src: "/figma/archive-001.jpg",
+      alt: "User interaction flow study",
+    },
+  ],
+  "luxury-lofts": [
+    {
+      title: "Digital check-in suite",
+      src: "/figma/service-4.png",
+      alt: "Luxury Lofts web check-in application design",
+      layout: "large",
+    },
+    {
+      title: "Architectural detail",
+      src: "/figma/archive-007.jpg",
+      alt: "Luxury Lofts interior architectural cues",
+      layout: "tall",
+    },
+    {
+      title: "Unboxing materials",
+      src: "/figma/archive-008.jpg",
+      alt: "Tactile unboxing paper assets",
+      layout: "wide",
+    },
+    {
+      title: "Guest suite mood",
+      src: "/figma/archive-001.jpg",
+      alt: "Luxury guest suite atmosphere board",
+    },
+    {
+      title: "Clean stationery",
+      src: "/figma/archive-003.jpg",
+      alt: "Minimalist brand stationery overview",
+    },
+  ],
+  "owa": [
+    {
+      title: "Parisian runway",
+      src: "/figma/archive-002.png",
+      alt: "OWA runway look editorial graphic",
+      layout: "large",
+    },
+    {
+      title: "Cultural board",
+      src: "/figma/archive-001.jpg",
+      alt: "West African textile culture moodboard",
+      layout: "tall",
+    },
+    {
+      title: "Indigo dye swatches",
+      src: "/figma/archive-005.jpg",
+      alt: "Indigo color dye swatches",
+    },
+    {
+      title: "Fashion mark concept",
+      src: "/figma/service-0.png",
+      alt: "OWA fashion mark concept typography",
+      layout: "wide",
+    },
+    {
+      title: "Pattern tests",
+      src: "/figma/archive-006.jpg",
+      alt: "Organic fabric pattern test blocks",
+    },
+  ],
+  "manjala-culture": [
+    {
+      title: "Brand strategy pages",
+      src: "/figma/service-2.png",
+      alt: "Manjala Culture brand strategy book page",
+      layout: "large",
+    },
+    {
+      title: "Street archiving",
+      src: "/figma/archive-002.png",
+      alt: "Street culture visual archiving detail",
+      layout: "tall",
+    },
+    {
+      title: "Grids & structures",
+      src: "/figma/archive-003.jpg",
+      alt: "Visual rhythm and grids study layout",
+    },
+    {
+      title: "Grotesque type study",
+      src: "/figma/archive-008.jpg",
+      alt: "Custom heavy grotesque type pairing study",
+      layout: "wide",
+    },
+    {
+      title: "Textured reference",
+      src: "/figma/archive-001.jpg",
+      alt: "Print texture study",
+    },
+  ],
+  "ivealth": [
+    {
+      title: "Investment dashboard UI",
+      src: "/figma/service-5.png",
+      alt: "Ivealth asset-allocation dashboard UI screen",
+      layout: "large",
+    },
+    {
+      title: "User research maps",
+      src: "/figma/archive-004.jpg",
+      alt: "Ivealth user journey and persona maps",
+      layout: "tall",
+    },
+    {
+      title: "Wealth-building cards",
+      src: "/figma/archive-003.jpg",
+      alt: "Educational fractional ownership cards",
+      layout: "wide",
+    },
+    {
+      title: "Visual guidelines",
+      src: "/figma/archive-002.png",
+      alt: "Fintech interface graphic assets",
+    },
+  ],
+  "retrorave-festivals": [
+    {
+      title: "Main campaign graphic",
+      src: "/figma/service-3.png",
+      alt: "Retrorave main campaign key art graphic",
+      layout: "large",
+    },
+    {
+      title: "Analog Xerox textures",
+      src: "/figma/archive-006.jpg",
+      alt: "Xerox scanned analog print textures",
+      layout: "tall",
+    },
+    {
+      title: "Poster installations",
+      src: "/figma/archive-005.jpg",
+      alt: "Offline street poster print installations",
+      layout: "wide",
+    },
+    {
+      title: "Neon spectrum studies",
+      src: "/figma/archive-007.jpg",
+      alt: "Glow details and neon spectrum color maps",
+    },
+    {
+      title: "Retro typography logo",
+      src: "/figma/archive-002.png",
+      alt: "Logo design inspired by retro club visuals",
+    },
+  ],
+};
+
+function getProjectFromHref(href: string) {
+  const slug = href.replace(/^\/works\//, "");
+  return slug in PROJECTS_DATA ? PROJECTS_DATA[slug as ProjectSlug] : undefined;
+}
+
+function getBentoClass(layout: RealityShot["layout"]) {
+  switch (layout) {
+    case "large":
+      return "md:col-span-2 md:row-span-2";
+    case "wide":
+      return "md:col-span-2";
+    case "tall":
+      return "md:row-span-2";
+    default:
+      return "";
+  }
+}
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -367,6 +742,8 @@ export default async function WorkDetailPage({ params }: Props) {
   const { slug } = await params;
   const project = PROJECTS_DATA[slug as keyof typeof PROJECTS_DATA];
   if (!project) notFound();
+  const realityShots =
+    REALITY_SHOTS[slug as ProjectSlug] ?? DEFAULT_REALITY_SHOTS;
 
   return (
     <div className="relative flex min-h-full flex-col bg-background text-foreground">
@@ -426,14 +803,7 @@ export default async function WorkDetailPage({ params }: Props) {
               ))}
             </h1>
             <p className="text-[clamp(1rem,1.5vw,1.5625rem)] font-medium tracking-[-0.64px] text-muted">
-              {project.title === "The Clarity Table" && "where Clarity begins"}
-              {project.title === "G.R.I.T." && "Built to move — a brand for those who won't stop regardless"}
-              {project.title === "Zcash.me" && "Designed on a dare — clarity for a product that deserved to be understood"}
-              {project.title === "Luxury Lofts" && "Elevated living, quietly refined"}
-              {project.title === "OWA" && "Culture in every curve"}
-              {project.title === "Manjala Culture" && "Built from culture, made to move"}
-              {project.title === "Ivealth" && "Invest with everyday clarity"}
-              {project.title === "Retrorave Festivals" && "Past sounds. Future nights."}
+              {project.summary}
             </p>
           </div>
           <div className="relative w-full overflow-hidden" style={{ aspectRatio: "1872/480" }}>
@@ -558,12 +928,29 @@ export default async function WorkDetailPage({ params }: Props) {
                 View gallery
               </Link>
             </div>
-            <div className="mx-auto grid w-full max-w-[1920px] grid-cols-1 gap-10 px-10 md:grid-cols-2">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <div
-                  key={i}
-                  className={`h-[500px] rounded-2xl bg-background md:h-[600px] lg:h-[700px] ${i === 0 ? "md:col-span-2 lg:col-span-1" : ""}`}
-                />
+            <div className="mx-auto grid w-full max-w-[1920px] grid-cols-1 gap-3 px-5 sm:grid-cols-2 md:auto-rows-[170px] md:grid-cols-4 md:gap-4 md:px-10 lg:auto-rows-[210px] xl:auto-rows-[250px]">
+              {realityShots.map((shot, i) => (
+                <figure
+                  key={`${shot.title}-${i}`}
+                  className={`group relative min-h-[260px] overflow-hidden rounded-2xl bg-background shadow-[0_18px_50px_rgba(0,0,0,0.22)] md:min-h-0 ${getBentoClass(shot.layout)}`}
+                >
+                  <Image
+                    src={shot.src}
+                    alt={shot.alt}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-[1.035]"
+                    sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 25vw"
+                    style={{ objectPosition: shot.objectPosition ?? "center" }}
+                  />
+                  <figcaption className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 bg-gradient-to-t from-black/80 via-black/25 to-transparent p-4 pt-16 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-within:opacity-100">
+                    <span className="max-w-[16ch] text-[15px] font-medium uppercase leading-[1.05] tracking-[-0.4px] text-white">
+                      {shot.title}
+                    </span>
+                    <span className="text-[13px] font-normal uppercase leading-none tracking-[-0.4px] text-white/70">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                  </figcaption>
+                </figure>
               ))}
             </div>
           </div>
@@ -579,40 +966,44 @@ export default async function WorkDetailPage({ params }: Props) {
 
           <div className="flex flex-col gap-16 lg:flex-row lg:items-start lg:gap-8">
             <div className="flex flex-1 flex-wrap gap-8 lg:gap-5">
-              {project.relatedProjects.map((rp) => (
-                <Link
-                  key={rp.title}
-                  href={rp.slug}
-                  className="group flex w-full flex-col gap-4 sm:w-[calc(50%-1rem)] lg:w-[clamp(200px,30%,500px)]"
-                >
-                  <div className="aspect-[500/607] w-full rounded-2xl bg-card transition-opacity group-hover:opacity-85" />
-                  <div className="flex items-center gap-2 px-1">
-                    <svg
-                      width="22"
-                      height="22"
-                      viewBox="0 0 22 22"
-                      fill="none"
-                      className="shrink-0"
-                      aria-hidden
-                    >
-                      <circle cx="11" cy="11" r="11" fill="var(--accent)" />
-                      <path
-                        d="M7 11h8M12 8l3 3-3 3"
-                        stroke="white"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                    <span className="text-[clamp(1.25rem,2.5vw,2.1875rem)] font-medium leading-normal text-foreground">
-                      {rp.title}
-                    </span>
-                  </div>
-                  <p className="text-[clamp(1rem,2vw,1.875rem)] font-normal leading-normal text-muted">
-                    {rp.description}
-                  </p>
-                </Link>
-              ))}
+              {project.relatedProjects.map((rp) => {
+                const relatedProject = getProjectFromHref(rp.slug);
+
+                return (
+                  <Link
+                    key={rp.title}
+                    href={rp.slug}
+                    className="group flex w-full flex-col gap-4 sm:w-[calc(50%-1rem)] lg:w-[clamp(200px,30%,500px)]"
+                  >
+                    <div className="aspect-[500/607] w-full rounded-2xl bg-card transition-opacity group-hover:opacity-85" />
+                    <div className="flex items-center gap-2 px-1">
+                      <svg
+                        width="22"
+                        height="22"
+                        viewBox="0 0 22 22"
+                        fill="none"
+                        className="shrink-0"
+                        aria-hidden
+                      >
+                        <circle cx="11" cy="11" r="11" fill="var(--accent)" />
+                        <path
+                          d="M7 11h8M12 8l3 3-3 3"
+                          stroke="white"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                      <span className="text-[clamp(1.25rem,2.5vw,2.1875rem)] font-medium leading-normal text-foreground">
+                        {rp.title}
+                      </span>
+                    </div>
+                    <p className="text-[clamp(1rem,2vw,1.875rem)] font-normal leading-normal text-muted">
+                      {relatedProject?.summary ?? rp.description}
+                    </p>
+                  </Link>
+                );
+              })}
             </div>
 
             <div className="flex shrink-0 items-center justify-center lg:self-stretch">

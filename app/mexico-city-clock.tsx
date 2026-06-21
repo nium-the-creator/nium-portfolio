@@ -23,16 +23,25 @@ const nigerianMobileTimeFormatter = new Intl.DateTimeFormat("en-US", {
 });
 
 export function MexicoCityClock({ compact, mobile }: MexicoCityClockProps) {
-  const [now, setNow] = useState(() => new Date());
+  const [now, setNow] = useState<Date | null>(null);
 
   useEffect(() => {
-    const id = setInterval(() => setNow(new Date()), 1000);
-    return () => clearInterval(id);
+    const update = () => setNow(new Date());
+    const initialId = window.setTimeout(update, 0);
+    const intervalId = window.setInterval(update, 1000);
+    return () => {
+      window.clearTimeout(initialId);
+      window.clearInterval(intervalId);
+    };
   }, []);
 
-  const formatted = mobile
-    ? nigerianMobileTimeFormatter.format(now)
-    : nigerianTimeFormatter.format(now);
+  const formatted = now
+    ? mobile
+      ? nigerianMobileTimeFormatter.format(now)
+      : nigerianTimeFormatter.format(now)
+    : mobile
+      ? "--:-- --"
+      : "--:--:-- --";
 
   return (
     <span

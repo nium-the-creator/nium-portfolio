@@ -31,6 +31,7 @@ type Project = {
   slug: string;
   tagline: string;
   filterIds: CategoryId[];
+  image: string;
 };
 
 const PROJECTS: Project[] = [
@@ -39,48 +40,56 @@ const PROJECTS: Project[] = [
     slug: "the-clarity-table",
     tagline: "Where clarity begins",
     filterIds: ["brand-identity", "brand-strategy", "campaign"],
+    image: "/figma/service-0.png",
   },
   {
     title: "G.R.I.T.",
     slug: "grit",
     tagline: "Built to move — a brand for those who won't stop regardless",
     filterIds: ["art-direction", "brand-strategy", "campaign"],
+    image: "/figma/service-1.png",
   },
   {
     title: "ZCASH.ME",
     slug: "zcash-me",
     tagline: "Simple money, sharper moves",
     filterIds: ["ui-ux", "brand-strategy"],
+    image: "/figma/service-5.png",
   },
   {
     title: "LUXURY LOFTS",
     slug: "luxury-lofts",
     tagline: "Elevated living, quietly refined",
     filterIds: ["ui-ux", "packaging"],
+    image: "/figma/service-4.png",
   },
   {
     title: "OWA",
     slug: "owa",
     tagline: "Culture in every curve",
     filterIds: ["brand-identity", "campaign"],
+    image: "/figma/service-0.png",
   },
   {
     title: "MANJALA CULTURE",
     slug: "manjala-culture",
     tagline: "Built from culture, made to move",
     filterIds: ["art-direction", "brand-strategy"],
+    image: "/figma/service-2.png",
   },
   {
     title: "IVEALTH",
     slug: "ivealth",
     tagline: "Invest with everyday clarity",
     filterIds: ["ui-ux", "brand-identity"],
+    image: "/figma/service-5.png",
   },
   {
     title: "RETRORAVE FESTIVALS",
     slug: "retrorave-festivals",
     tagline: "Past sounds. Future nights.",
     filterIds: ["campaign", "brand-identity", "art-direction"],
+    image: "/figma/service-3.png",
   },
 ];
 
@@ -159,6 +168,14 @@ export function WorksView() {
                   className="group block focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 >
                   <div className="relative aspect-[865/982] w-full overflow-hidden bg-[#121212]">
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-[1.035]"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      unoptimized
+                    />
                     <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/95 via-black/55 to-transparent p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
                       <div className="flex items-end justify-between gap-6 text-white">
                         <p className="max-w-[52%] text-[15px] font-normal leading-[18px] tracking-[-0.6px]">

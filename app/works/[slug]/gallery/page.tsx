@@ -3,26 +3,101 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { MexicoCityClock } from "../../../mexico-city-clock";
 
-const GALLERIES = {
+type GalleryItem = {
+  title: string;
+  phase: string;
+  type: "image" | "video";
+  src: string;
+  alt?: string;
+  aspectRatio?: string;
+  featured?: boolean;
+  objectPosition?: string;
+  priority?: boolean;
+};
+
+type Gallery = {
+  title: string;
+  eyebrow: string;
+  description: string;
+  backHref: string;
+  customLayout?: boolean;
+  items: GalleryItem[];
+};
+
+const GALLERIES: Partial<Record<string, Gallery>> = {
   "the-clarity-table": {
     title: "The Clarity Table",
-    eyebrow: "Project gallery",
+    eyebrow: "Faith-rooted identity archive",
     description:
-      "A visual walkthrough of the faith-rooted podcast identity, from early exploration and campaign direction to the finished system in use.",
+      "A focused walkthrough of the podcast identity: strategic references, youthful visual language, campaign texture, and applied brand moments shaped around clarity, counsel, and intentional living.",
     backHref: "/works/the-clarity-table",
+    customLayout: true,
     items: [
-      { title: "Discovery mood", phase: "Process", type: "image", src: "/figma/archive-001.jpg" },
-      { title: "Visual references", phase: "Process", type: "image", src: "/figma/archive-002.png" },
-      { title: "Motion exploration", phase: "Process", type: "video", src: "/figma/intro-generated.mp4" },
-      { title: "Tone and direction", phase: "Process", type: "image", src: "/figma/archive-003.jpg" },
-      { title: "Campaign texture", phase: "Process", type: "image", src: "/figma/archive-004.jpg" },
-      { title: "Identity system", phase: "Finished system", type: "image", src: "/figma/service-0.png" },
-      { title: "Art direction", phase: "Finished system", type: "image", src: "/figma/service-1.png" },
-      { title: "Strategy moments", phase: "Finished system", type: "image", src: "/figma/service-2.png" },
-      { title: "Campaign rollout", phase: "Finished system", type: "image", src: "/figma/service-3.png" },
-      { title: "Applied materials", phase: "Finished system", type: "image", src: "/figma/service-4.png" },
-      { title: "Digital presence", phase: "Finished system", type: "image", src: "/figma/service-5.png" },
-      { title: "System in motion", phase: "Finished system", type: "video", src: "/figma/intro-generated.mp4" },
+      {
+        title: "Gathering direction",
+        phase: "Brand strategy",
+        type: "image",
+        src: "/figma/archive-001.jpg",
+        alt: "Mood image representing the gathering direction for The Clarity Table",
+        aspectRatio: "3 / 4",
+      },
+      {
+        title: "Youthful visual cues",
+        phase: "Mood and tone",
+        type: "image",
+        src: "/figma/archive-002.png",
+        alt: "Visual reference for a youthful faith-rooted podcast identity",
+        aspectRatio: "3 / 4",
+      },
+      {
+        title: "Counsel in motion",
+        phase: "Motion study",
+        type: "video",
+        src: "/figma/intro-generated.mp4",
+        aspectRatio: "16 / 9",
+        featured: true,
+      },
+      {
+        title: "Conversation texture",
+        phase: "Campaign direction",
+        type: "image",
+        src: "/figma/archive-003.jpg",
+        alt: "Campaign texture study for The Clarity Table",
+        aspectRatio: "3 / 4",
+      },
+      {
+        title: "The table system",
+        phase: "Identity system",
+        type: "image",
+        src: "/figma/service-0.png",
+        alt: "Identity system artwork for The Clarity Table",
+        aspectRatio: "16 / 10",
+        featured: true,
+      },
+      {
+        title: "Spiritual depth",
+        phase: "Art direction",
+        type: "image",
+        src: "/figma/service-1.png",
+        alt: "Art direction image showing the spiritual tone of The Clarity Table",
+        aspectRatio: "4 / 5",
+      },
+      {
+        title: "Clarity prompts",
+        phase: "Content system",
+        type: "image",
+        src: "/figma/service-2.png",
+        alt: "Content system study for clarity-led podcast conversations",
+        aspectRatio: "9 / 16",
+      },
+      {
+        title: "Launch rollout",
+        phase: "Campaign rollout",
+        type: "image",
+        src: "/figma/service-3.png",
+        alt: "Campaign rollout artwork for The Clarity Table",
+        aspectRatio: "3 / 4",
+      },
     ],
   },
   "grit": {
@@ -121,7 +196,7 @@ const GALLERIES = {
       { title: "Stage motion visuals", phase: "Finished system", type: "video", src: "/figma/intro-generated.mp4" },
     ],
   },
-} as const;
+};
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -191,49 +266,66 @@ export default async function ProjectGalleryPage({ params }: Props) {
           </div>
 
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {gallery.items.map((item, index) => (
-              <article
-                key={`${item.title}-${index}`}
-                className={`group flex flex-col gap-4 ${
-                  index === 0 || index === 7 ? "md:col-span-2" : ""
-                }`}
-              >
-                <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-card">
-                  {item.type === "video" ? (
-                    <video
-                      className="h-full w-full object-cover"
-                      src={item.src}
-                      autoPlay
-                      muted
-                      loop
-                      playsInline
-                      preload="metadata"
-                    />
-                  ) : (
-                    <Image
-                      src={item.src}
-                      alt=""
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-                    />
-                  )}
-                </div>
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <p className="text-[15px] font-normal uppercase leading-[18px] tracking-[-0.6px] text-muted">
-                      {item.phase}
-                    </p>
-                    <h2 className="text-[clamp(1.35rem,2vw,2.25rem)] font-medium uppercase leading-none tracking-[-1.2px]">
-                      {item.title}
-                    </h2>
+            {gallery.items.map((item, index) => {
+              const isFeatured =
+                item.featured ??
+                (!gallery.customLayout && (index === 0 || index === 7));
+
+              return (
+                <article
+                  key={`${item.title}-${index}`}
+                  className={`group flex flex-col gap-4 ${
+                    isFeatured ? "md:col-span-2" : ""
+                  }`}
+                >
+                  <div
+                    className="relative overflow-hidden rounded-2xl bg-card"
+                    style={{ aspectRatio: item.aspectRatio ?? "4 / 3" }}
+                  >
+                    {item.type === "video" ? (
+                      <video
+                        className="h-full w-full object-cover"
+                        src={item.src}
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        preload="metadata"
+                      />
+                    ) : (
+                      <Image
+                        src={item.src}
+                        alt={item.alt ?? `${gallery.title} - ${item.title}`}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                        priority={item.priority ?? index === 0}
+                        sizes={
+                          isFeatured
+                            ? "(max-width: 768px) 100vw, (max-width: 1280px) 100vw, 66vw"
+                            : "(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                        }
+                        style={{
+                          objectPosition: item.objectPosition ?? "center",
+                        }}
+                      />
+                    )}
                   </div>
-                  <span className="text-[15px] font-normal uppercase leading-[18px] tracking-[-0.6px] text-muted">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                </div>
-              </article>
-            ))}
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <p className="text-[15px] font-normal uppercase leading-[18px] tracking-[-0.6px] text-muted">
+                        {item.phase}
+                      </p>
+                      <h2 className="text-[clamp(1.35rem,2vw,2.25rem)] font-medium uppercase leading-none tracking-[-1.2px]">
+                        {item.title}
+                      </h2>
+                    </div>
+                    <span className="text-[15px] font-normal uppercase leading-[18px] tracking-[-0.6px] text-muted">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                  </div>
+                </article>
+              );
+            })}
           </div>
         </section>
       </main>

@@ -121,9 +121,10 @@ export default function Home() {
         >
           <div className="reveal-group mx-auto grid max-w-[1920px] gap-5 md:gap-6 lg:grid-cols-3 lg:gap-8">
             {selectedWorks.map((project, i) => (
-              <article
+              <Link
                 key={project.slug}
-              className="selected-work-card relative flex min-h-[240px] flex-col justify-between overflow-hidden rounded-xl border border-divider bg-card p-5 shadow-[0_18px_56px_rgba(0,0,0,0.3)] sm:min-h-[260px] md:min-h-[300px] md:p-6 lg:min-h-[340px] xl:min-h-[380px]"
+                href={`/works/${project.slug}`}
+                className="selected-work-card group relative flex min-h-[240px] flex-col justify-between overflow-hidden rounded-xl border border-divider bg-card p-5 shadow-[0_18px_56px_rgba(0,0,0,0.3)] sm:min-h-[260px] md:min-h-[300px] md:p-6 lg:min-h-[340px] xl:min-h-[380px] focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 style={{ "--reveal-delay": `${i * 70}ms` } as CSSProperties}
               >
                 <div className="selected-work-card__wash" aria-hidden="true" />
@@ -136,7 +137,7 @@ export default function Home() {
                     alt=""
                     width={15}
                     height={17}
-                    className="shrink-0"
+                    className="shrink-0 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
                   />
                 </div>
                 <div className="relative z-10 flex flex-1 items-center">
@@ -146,7 +147,7 @@ export default function Home() {
                       alt=""
                       width={15}
                       height={17}
-                      className="shrink-0"
+                      className="shrink-0 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
                     />
                     <span className="max-w-[16ch] text-[clamp(1.5rem,3vw,2.7rem)] font-bold leading-[0.92] text-foreground">
                       {project.title}
@@ -156,7 +157,7 @@ export default function Home() {
                 <p className="relative z-10 max-w-[22ch] text-[15px] font-normal uppercase leading-[18px] tracking-[-0.6px] text-muted">
                   Selected project
                 </p>
-              </article>
+              </Link>
             ))}
           </div>
         </section>

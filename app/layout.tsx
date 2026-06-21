@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
 import { CustomCursor } from "./custom-cursor";
+import { RouteScrollReset } from "./route-scroll-reset";
 import { ScrollReveal } from "./scroll-reveal";
 import "./globals.css";
 
@@ -27,6 +28,7 @@ export default function RootLayout({
       className={`${manrope.variable} h-full scroll-smooth antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans">
+        <RouteScrollReset />
         <ScrollReveal />
         <CustomCursor />
         {children}
