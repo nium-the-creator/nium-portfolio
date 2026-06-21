@@ -43,7 +43,9 @@ export function ContactView() {
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   // Booking Calendar States
-  const [selectedDate, setSelectedDate] = useState<number | null>(null);
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [currentMonth, setCurrentMonth] = useState(() => new Date().getMonth());
+  const [currentYear, setCurrentYear] = useState(() => new Date().getFullYear());
   const [selectedSlot, setSelectedSlot] = useState<string | null>(null);
   const [bookingStep, setBookingStep] = useState<"calendar" | "confirm" | "success">("calendar");
   const [bookingForm, setBookingForm] = useState({
@@ -52,6 +54,38 @@ export function ContactView() {
     notes: "",
   });
   const [bookingErrors, setBookingErrors] = useState<Record<string, string>>({});
+
+  const MONTH_NAMES = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
+
+  const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+  const firstDayIndex = new Date(currentYear, currentMonth, 1).getDay();
+
+  const prevMonth = () => {
+    setCurrentMonth((m) => {
+      if (m === 0) {
+        setCurrentYear((y) => y - 1);
+        return 11;
+      }
+      return m - 1;
+    });
+  };
+
+  const nextMonth = () => {
+    setCurrentMonth((m) => {
+      if (m === 11) {
+        setCurrentYear((y) => y + 1);
+        return 0;
+      }
+      return m + 1;
+    });
+  };
+
+  const todayDate = new Date();
+  const isPrevDisabled = currentYear < todayDate.getFullYear() || 
+    (currentYear === todayDate.getFullYear() && currentMonth <= todayDate.getMonth());
 
   // Handle service chip clicks
   const toggleService = (service: string) => {
@@ -342,7 +376,9 @@ export function ContactView() {
                     <div className="mx-auto mb-8 max-w-[320px] rounded-lg bg-background p-4 text-left border border-divider">
                       <p className="text-[12px] uppercase font-bold text-muted tracking-wider mb-2">Meeting Details</p>
                       <p className="text-[15px] font-bold text-foreground">Briefing & Strategy Consultation</p>
-                      <p className="text-[14px] text-foreground mt-1">🗓️ May {selectedDate}, 2026</p>
+                      <p className="text-[14px] text-foreground mt-1">
+                        🗓️ {selectedDate ? selectedDate.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }) : ""}
+                      </p>
                       <p className="text-[14px] text-foreground">⏰ {selectedSlot} (Lagos Time)</p>
                       <p className="text-[14px] text-accent mt-2 font-medium">💻 Google Meet Invite sent to {bookingForm.email}</p>
                     </div>
@@ -375,7 +411,9 @@ export function ContactView() {
                         <p className="text-[16px] font-bold text-foreground mt-0.5">Briefing Consultation</p>
                       </div>
                       <div className="text-left sm:text-right">
-                        <p className="text-[14px] font-semibold text-foreground">May {selectedDate}, 2026</p>
+                        <p className="text-[14px] font-semibold text-foreground">
+                          {selectedDate ? selectedDate.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }) : ""}
+                        </p>
                         <p className="text-[14px] text-accent font-medium">{selectedSlot}</p>
                       </div>
                     </div>
@@ -439,10 +477,35 @@ export function ContactView() {
                     {/* Calendar grid */}
                     <div className="rounded-2xl border border-divider bg-card p-6 shadow-sm">
                       <div className="flex items-center justify-between mb-6">
-                        <h3 className="text-[17px] font-bold uppercase tracking-[-0.6px] text-foreground">
-                          May 2026
-                        </h3>
-                        <span className="text-[12px] font-bold uppercase text-accent tracking-[1px]">
+                        <div className="flex items-center gap-3">
+                          <h3 className="text-[17px] font-bold uppercase tracking-[-0.6px] text-foreground min-w-[120px]">
+                            {MONTH_NAMES[currentMonth]} {currentYear}
+                          </h3>
+                          <div className="flex items-center gap-1.5">
+                            <button
+                              type="button"
+                              disabled={isPrevDisabled}
+                              onClick={prevMonth}
+                              className="flex size-7 items-center justify-center rounded-full border border-divider hover:bg-foreground/5 disabled:opacity-35 text-foreground"
+                              aria-label="Previous month"
+                            >
+                              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M15 19L8 12L15 5" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                              </svg>
+                            </button>
+                            <button
+                              type="button"
+                              onClick={nextMonth}
+                              className="flex size-7 items-center justify-center rounded-full border border-divider hover:bg-foreground/5 text-foreground"
+                              aria-label="Next month"
+                            >
+                              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M9 5L16 12L9 19" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                              </svg>
+                            </button>
+                          </div>
+                        </div>
+                        <span className="text-[12px] font-bold uppercase text-accent tracking-[1px] hidden sm:inline">
                           Lagos, Nigeria (GMT+1)
                         </span>
                       </div>
@@ -460,16 +523,27 @@ export function ContactView() {
 
                       {/* Date Cells */}
                       <div className="grid grid-cols-7 gap-y-2.5 gap-x-1.5">
-                        {/* Empty padding blocks for starting day of month (e.g. May 1st 2026 starts on Friday) */}
-                        {Array.from({ length: 5 }).map((_, i) => (
+                        {/* Empty padding blocks for starting day of month */}
+                        {Array.from({ length: firstDayIndex }).map((_, i) => (
                           <div key={`empty-${i}`} />
                         ))}
 
-                        {/* Rendering days 1 to 31 */}
-                        {Array.from({ length: 31 }).map((_, i) => {
+                        {/* Rendering days of month */}
+                        {Array.from({ length: daysInMonth }).map((_, i) => {
                           const dateNum = i + 1;
-                          const isBookable = dateNum > 21 && dateNum % 7 !== 0 && dateNum % 7 !== 6; // only future weekdays (e.g. 2026-05-21 is Thursday)
-                          const isSelected = selectedDate === dateNum;
+                          const cellDate = new Date(currentYear, currentMonth, dateNum);
+                          
+                          // Booking is possible only starting 2 days after today
+                          const today = new Date();
+                          today.setHours(0, 0, 0, 0);
+                          const minDate = new Date(today);
+                          minDate.setDate(today.getDate() + 2);
+
+                          const isBookable = cellDate >= minDate && cellDate.getDay() !== 0; // Sundays (0) are off
+                          const isSelected = selectedDate !== null && 
+                            selectedDate.getDate() === dateNum && 
+                            selectedDate.getMonth() === currentMonth && 
+                            selectedDate.getFullYear() === currentYear;
 
                           return (
                             <button
@@ -477,7 +551,7 @@ export function ContactView() {
                               type="button"
                               disabled={!isBookable}
                               onClick={() => {
-                                setSelectedDate(dateNum);
+                                setSelectedDate(cellDate);
                                 setSelectedSlot(null);
                               }}
                               className={`flex aspect-square items-center justify-center rounded-full text-[15px] font-semibold transition-all ${
@@ -499,7 +573,7 @@ export function ContactView() {
                     {selectedDate && (
                       <div className="flex flex-col gap-4 rounded-2xl border border-divider bg-card p-6 shadow-sm transition-all animate-reveal">
                         <p className="text-[14px] font-semibold uppercase tracking-[-0.6px] text-foreground">
-                          Available Times for May {selectedDate}
+                          Available Times for {selectedDate ? selectedDate.toLocaleDateString("en-US", { month: "long", day: "numeric" }) : ""}
                         </p>
                         <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
                           {TIME_SLOTS.map((slot) => {
