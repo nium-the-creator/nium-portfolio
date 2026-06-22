@@ -40,7 +40,7 @@ const PROJECTS: Project[] = [
     slug: "the-clarity-table",
     tagline: "Where clarity begins",
     filterIds: ["brand-identity", "brand-strategy", "campaign"],
-    image: "/figma/service-0.png",
+    image: "/figma/the-clarity-table/Banner Image.png",
   },
   {
     title: "G.R.I.T.",
