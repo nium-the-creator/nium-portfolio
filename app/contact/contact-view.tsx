@@ -2,7 +2,6 @@
 
 import { useState, useTransition } from "react";
 import Image from "next/image";
-import { SOCIAL_LINKS } from "@/lib/contact-links";
 
 const SERVICES_OPTIONS = [
   "Brand Identity",

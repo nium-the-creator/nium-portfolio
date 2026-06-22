@@ -796,17 +796,27 @@ export default async function WorkDetailPage({ params }: Props) {
               {project.summary}
             </p>
           </div>
-          <div className="relative w-full overflow-hidden" style={{ aspectRatio: "1872/480" }}>
-            <Image
-              src={project.heroImage}
-              alt={`${project.title} hero`}
-              fill
-              className="object-cover object-center"
-              priority
-              sizes="100vw"
-              unoptimized
-            />
-          </div>
+          {slug === "the-clarity-table" ? (
+            <div className="relative w-full overflow-hidden rounded-2xl bg-card shadow-[0_18px_50px_rgba(0,0,0,0.22)]">
+              <img
+                src={project.heroImage}
+                alt={`${project.title} hero`}
+                className="w-full h-auto block"
+              />
+            </div>
+          ) : (
+            <div className="relative w-full overflow-hidden" style={{ aspectRatio: "1872/480" }}>
+              <Image
+                src={project.heroImage}
+                alt={`${project.title} hero`}
+                fill
+                className="object-cover object-center"
+                priority
+                sizes="100vw"
+                unoptimized
+              />
+            </div>
+          )}
         </section>
 
         {/* Details */}
@@ -911,38 +921,57 @@ export default async function WorkDetailPage({ params }: Props) {
               <p className="max-w-5xl text-center text-[clamp(1.5rem,3vw,3.0625rem)] font-semibold uppercase leading-none tracking-[-1.568px] md:text-left">
                 {project.title === "The Clarity Table" ? "Clarity" : project.title} in Reality - The brand out in the wild!
               </p>
-              <Link
-                href={project.galleryUrl}
-                className="w-fit shrink-0 text-[clamp(1rem,1.5vw,1.5625rem)] font-medium uppercase leading-tight tracking-[-0.64px] text-accent underline decoration-solid transition-opacity hover:opacity-70"
-              >
-                View gallery
-              </Link>
-            </div>
-            <div className="mx-auto grid w-full max-w-[1920px] grid-cols-1 gap-3 px-5 sm:grid-cols-2 md:auto-rows-[170px] md:grid-cols-4 md:gap-4 md:px-10 lg:auto-rows-[210px] xl:auto-rows-[250px]">
-              {realityShots.map((shot, i) => (
-                <figure
-                  key={`${shot.title}-${i}`}
-                  className={`group relative min-h-[260px] overflow-hidden rounded-2xl bg-background shadow-[0_18px_50px_rgba(0,0,0,0.22)] md:min-h-0 ${getBentoClass(shot.layout)}`}
+              {slug !== "the-clarity-table" && (
+                <Link
+                  href={project.galleryUrl}
+                  className="w-fit shrink-0 text-[clamp(1rem,1.5vw,1.5625rem)] font-medium uppercase leading-tight tracking-[-0.64px] text-accent underline decoration-solid transition-opacity hover:opacity-70"
                 >
-                  <Image
-                    src={shot.src}
-                    alt={shot.alt}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-[1.035]"
-                    sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 25vw"
-                    style={{ objectPosition: shot.objectPosition ?? "center" }}
-                  />
-                  <figcaption className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 bg-gradient-to-t from-black/80 via-black/25 to-transparent p-4 pt-16 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-within:opacity-100">
-                    <span className="max-w-[16ch] text-[15px] font-medium uppercase leading-[1.05] tracking-[-0.4px] text-white">
-                      {shot.title}
-                    </span>
-                    <span className="text-[13px] font-normal uppercase leading-none tracking-[-0.4px] text-white/70">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                  </figcaption>
-                </figure>
-              ))}
+                  View gallery
+                </Link>
+              )}
             </div>
+            {slug === "the-clarity-table" ? (
+              <div className="mx-auto flex w-full max-w-[1400px] flex-col gap-6 px-5 md:gap-10 md:px-10">
+                {realityShots.map((shot, i) => (
+                  <div
+                    key={`${shot.title}-${i}`}
+                    className="relative w-full overflow-hidden rounded-2xl bg-card shadow-[0_18px_50px_rgba(0,0,0,0.22)]"
+                  >
+                    <img
+                      src={shot.src}
+                      alt={shot.alt}
+                      className="w-full h-auto block"
+                    />
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="mx-auto grid w-full max-w-[1920px] grid-cols-1 gap-3 px-5 sm:grid-cols-2 md:auto-rows-[170px] md:grid-cols-4 md:gap-4 md:px-10 lg:auto-rows-[210px] xl:auto-rows-[250px]">
+                {realityShots.map((shot, i) => (
+                  <figure
+                    key={`${shot.title}-${i}`}
+                    className={`group relative min-h-[260px] overflow-hidden rounded-2xl bg-background shadow-[0_18px_50px_rgba(0,0,0,0.22)] md:min-h-0 ${getBentoClass(shot.layout)}`}
+                  >
+                    <Image
+                      src={shot.src}
+                      alt={shot.alt}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-[1.035]"
+                      sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 25vw"
+                      style={{ objectPosition: shot.objectPosition ?? "center" }}
+                    />
+                    <figcaption className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 bg-gradient-to-t from-black/80 via-black/25 to-transparent p-4 pt-16 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-within:opacity-100">
+                      <span className="max-w-[16ch] text-[15px] font-medium uppercase leading-[1.05] tracking-[-0.4px] text-white">
+                        {shot.title}
+                      </span>
+                      <span className="text-[13px] font-normal uppercase leading-none tracking-[-0.4px] text-white/70">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                    </figcaption>
+                  </figure>
+                ))}
+              </div>
+            )}
           </div>
         </section>
 
